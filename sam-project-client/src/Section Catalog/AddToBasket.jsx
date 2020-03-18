@@ -37,29 +37,60 @@ export class Basket extends React.Component {
     super(props);
     this.state = {
       items: [],
-      counter: 0
+      counter: 0,
+      shouldShowElem: false
     };
   }
   componentDidMount = () => {
     this.setState({
-      items: arrLS
+      items: arrLS,
+      counter: arrLS.length
     });
   };
-  func = () => {
+
+  updateCounter = () => {
     const items = this.state.items;
-    console.log("baskettttt", items);
+    this.setState({
+      counter: items.length
+    });
   };
+
+  hoverOn = () => {
+    const items = this.state.items;
+    this.setState({
+      shouldShowElem: true,
+      counter: items.length
+    });
+  };
+
+  // hoverOff = () => {
+  //   const items = this.state.items;
+  //   this.setState({
+  //     shouldShowElem: false,
+  //     counter: items.length
+  //   });
+  // };
 
   render() {
     const items = this.state.items;
-    console.log("basket", items);
+    const counter = this.state.counter;
+    console.log("basket", items, counter);
     return (
-      <div className="header-info__basket text flex-center" onClick={this.func}>
+      <div
+        className="header-info__basket text flex-center"
+        onClickCapture={this.hoverOn}
+        // onMouseOut={this.hoverOff}
+      >
         {BasketIcon}
         <div className="basket-counter flex-center color-white">
-          {/* {this.state.counter} */}
+          {this.state.counter}
         </div>
-        <BasketMarkup items={this.state.items} />
+        {this.state.shouldShowElem && (
+          <BasketMarkup
+            items={this.state.items}
+            hadUpdated={this.updateCounter}
+          />
+        )}
       </div>
     );
   }
@@ -77,7 +108,10 @@ export class BasketMarkup extends React.Component {
     arrLS.splice(i, 1);
     this.setState({ items: arrLS });
     localStorage.setItem("itemById", JSON.stringify(arrLS));
+    if (this.props.hadUpdated) this.props.hadUpdated();
   };
+
+  totalPrice = () => {};
 
   render() {
     const items = this.props.items;
@@ -95,30 +129,8 @@ export class BasketMarkup extends React.Component {
             </div>
           );
         })}
+        <div className="total-price">Total price: </div>
       </div>
     );
   }
 }
-
-// function UpdateBasketMarkup() {
-//   const items = this.props.items;
-//   return <div className="mybasket"></div>;
-// }
-
-// function CreateOneNoteMarkup(item, i) {
-//   function handleRemove(i) {
-//     arrLS.splice(i, 1);
-//     this.setState({ items: arrLS });
-//     localStorage.setItem("itemById", JSON.stringify(arrLS));
-//   }
-//   return (
-//     <div key={i} className="mybasket-prod">
-//       <img src="/img/muffin.png" />
-//       <div>
-//         <p className="text color-white">{item[i].product.name}</p>
-//         <p className="text color-white">{item[i].product.price}</p>
-//       </div>
-//       <div className="btn-delete" onClick={handleRemove}></div>
-//     </div>
-//   );
-// }
