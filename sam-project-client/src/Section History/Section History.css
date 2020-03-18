@@ -1,0 +1,64 @@
+.history {
+  padding: 100px 0;
+  background-color: #fefefe;
+}
+
+.history-content {
+  margin: 20px 200px;
+  flex-direction: column;
+}
+
+.history__text {
+  width: 670px;
+}
+
+.history__name {
+  font-size: 30px;
+  font-weight: 600;
+  font-style: italic;
+  color: #45271f;
+  margin-top: 25px;
+}
+
+.history__position {
+  color: #e0a45e;
+  font-size: 20px;
+  margin: 5px 0px 50px;
+}
+
+.history__buttons {
+  width: 800px;
+}
+
+.onbutton-content {
+  width: 1000px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 50px 0;
+}
+
+.onbutton-image {
+  width: 45%;
+}
+
+.onbutton-info {
+  width: 55%;
+}
+
+.ouraddress {
+  margin: 15px 0;
+}
+
+.view-on-map {
+  display: inline-block;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.onbutton-image img {
+  width: 400px;
+  height: 400px;
+  border-radius: 100%;
+}

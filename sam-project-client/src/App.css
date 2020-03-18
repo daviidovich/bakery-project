@@ -1,0 +1,71 @@
+.text {
+  color: #888888;
+  font-family: "Times New Roman";
+  font-size: 19px;
+}
+
+.color-brown {
+  color: #45271f;
+}
+
+.color-beige {
+  color: #dfa45c;
+}
+
+.color-white {
+  color: white;
+}
+
+.color-red {
+  color: #ff6d00;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.App {
+  width: 90%;
+  border: 2px solid black;
+  margin: 0px auto;
+  background-color: #fffbf0;
+}
+
+h2 {
+  font-size: 50px;
+  font-weight: 600;
+  letter-spacing: -2px;
+  margin: 0;
+}
+
+h3 {
+  font-size: 30px;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+h4 {
+  font-size: 20px;
+  letter-spacing: -1px;
+}
+
+a:visited,
+a:link {
+  color: #888888;
+}

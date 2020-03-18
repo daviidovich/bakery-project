@@ -1,0 +1,35 @@
+.features-content {
+  width: 1125px;
+  margin: 50px 312px 100px;
+}
+
+.features-slider {
+  width: 100%;
+}
+
+.feature {
+  border: 1px solid #eaeae8;
+  border-radius: 5px;
+  background-color: white;
+  margin: 10px;
+  &:hover {
+    border: 1px solid #cacaca;
+  }
+}
+
+.feature-content {
+  flex-direction: column;
+  margin: 25px 25px 80px 25px;
+}
+
+.feature-image {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #efefed;
+  border-radius: 5px;
+  background-color: #fffae7;
+}
+
+.feature-title {
+  margin: 25px 0;
+}

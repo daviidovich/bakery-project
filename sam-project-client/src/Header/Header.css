@@ -1,0 +1,21 @@
+.header {
+  height: 170px;
+  padding: 0px 90px;
+}
+.header-info {
+  display: flex;
+}
+
+.header-info__address {
+  margin-left: 20px;
+}
+
+.header-info__workTime {
+  padding: 0 20px;
+  border-right: 1px solid #888888;
+}
+
+.header-info__lang-select {
+  background-color: #fffbf0;
+  border: none;
+}

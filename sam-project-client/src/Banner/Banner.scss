@@ -1,0 +1,44 @@
+.banner-content {
+  display: flex;
+  margin: 120px 270px;
+}
+
+.banner-price {
+  margin-top: 70px;
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.banner-title {
+  font-size: 85px;
+  font-weight: 600;
+  letter-spacing: -3px;
+  margin: 0;
+}
+
+.banner-product {
+  font-size: 80px;
+  font-weight: 100;
+  letter-spacing: 0;
+  text-decoration: underline;
+  margin: 0;
+}
+
+.banner-image {
+  position: relative;
+  & img {
+    height: 600px;
+  }
+}
+
+.banner-discount {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-image: url("/img/discount-beige.png");
+  background-size: cover;
+  font-size: 36px;
+}

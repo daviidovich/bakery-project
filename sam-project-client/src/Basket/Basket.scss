@@ -1,0 +1,57 @@
+.header-info__basket {
+  position: relative;
+  margin-left: 5px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.basket-counter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #e0a45e;
+  border-radius: 100%;
+  width: 15px;
+  height: 15px;
+  font-size: 15px;
+}
+
+.mybasket {
+  position: absolute;
+  width: 250px;
+  background-color: #45271f;
+  color: white;
+  top: 50px;
+  right: -30px;
+  z-index: 5;
+  border-radius: 5px;
+}
+
+.mybasket-prod {
+  position: relative;
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #e6c29859;
+  & img {
+    width: 50px;
+    height: 50px;
+  }
+  & div {
+    // display: flex;
+    // flex-direction: column;
+    margin-left: 10px;
+    & p {
+      margin: 3px;
+    }
+  }
+}
+
+.btn-delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  background-image: url("/img/close-icon.png");
+  background-size: cover;
+}

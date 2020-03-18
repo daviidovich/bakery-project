@@ -1,0 +1,9 @@
+#map {
+  height: 800px;
+  width: 100%;
+}
+
+.map-baloon-image {
+  height: 150px;
+  width: 200px;
+}

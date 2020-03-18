@@ -1,0 +1,124 @@
+import React from "react";
+import { BasketIcon } from "../Another/Icons";
+import image from "./bagel.png";
+import api from "../API/api";
+import "../Basket/Basket.scss";
+
+var arrLS = JSON.parse(localStorage.getItem("itemById")) || [];
+
+export default class AddtoBasket extends React.Component {
+  getProductId = async () => {
+    const itemById = await api.getProductById(this.props.id);
+    const item = itemById.data.data;
+    this.addToLS(item, arrLS);
+  };
+
+  addToLS = (item, arrLS) => {
+    arrLS.push(item);
+    localStorage.setItem("itemById", JSON.stringify(arrLS));
+    alert(`Added ${item.product.name}`);
+    console.log("arr", arrLS);
+  };
+
+  render() {
+    return (
+      <div
+        className="catalog-list-one__basket text"
+        onClick={this.getProductId}
+      >
+        {BasketIcon}
+      </div>
+    );
+  }
+}
+
+export class Basket extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [],
+      counter: 0
+    };
+  }
+  componentDidMount = () => {
+    this.setState({
+      items: arrLS
+    });
+  };
+  func = () => {
+    const items = this.state.items;
+    console.log("baskettttt", items);
+  };
+
+  render() {
+    const items = this.state.items;
+    console.log("basket", items);
+    return (
+      <div className="header-info__basket text flex-center" onClick={this.func}>
+        {BasketIcon}
+        <div className="basket-counter flex-center color-white">
+          {/* {this.state.counter} */}
+        </div>
+        <BasketMarkup items={this.state.items} />
+      </div>
+    );
+  }
+}
+
+export class BasketMarkup extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: []
+    };
+  }
+
+  handleRemove = i => {
+    arrLS.splice(i, 1);
+    this.setState({ items: arrLS });
+    localStorage.setItem("itemById", JSON.stringify(arrLS));
+  };
+
+  render() {
+    const items = this.props.items;
+    return (
+      <div className="mybasket">
+        {Object.keys(items).map(i => {
+          return (
+            <div key={i} className="mybasket-prod">
+              <img src="/img/muffin.png" />
+              <div>
+                <p className="text color-white">{items[i].product.name}</p>
+                <p className="text color-white">{items[i].product.price}</p>
+              </div>
+              <div className="btn-delete" onClick={this.handleRemove}></div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+}
+
+// function UpdateBasketMarkup() {
+//   const items = this.props.items;
+//   return <div className="mybasket"></div>;
+// }
+
+// function CreateOneNoteMarkup(item, i) {
+//   function handleRemove(i) {
+//     arrLS.splice(i, 1);
+//     this.setState({ items: arrLS });
+//     localStorage.setItem("itemById", JSON.stringify(arrLS));
+//   }
+//   return (
+//     <div key={i} className="mybasket-prod">
+//       <img src="/img/muffin.png" />
+//       <div>
+//         <p className="text color-white">{item[i].product.name}</p>
+//         <p className="text color-white">{item[i].product.price}</p>
+//       </div>
+//       <div className="btn-delete" onClick={handleRemove}></div>
+//     </div>
+//   );
+// }

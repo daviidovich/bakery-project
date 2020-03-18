@@ -1,0 +1,30 @@
+.nav {
+  height: 70px;
+  border: 2px solid #eaeae8;
+}
+
+.nav-content {
+  margin: 0 215px;
+}
+
+.nav-items {
+  list-style-type: none;
+  line-height: 70px;
+  margin: 0;
+}
+
+.nav-item {
+  margin: 0px 10px;
+  padding: 0 15px;
+  cursor: pointer;
+  text-align: center;
+  &:hover {
+    background-color: #ffe6dd;
+    color: #e0a45e;
+  }
+}
+
+.nav-link-active {
+  color: #e0a45e;
+  border-bottom: 4px dotted #e0a45e;
+}

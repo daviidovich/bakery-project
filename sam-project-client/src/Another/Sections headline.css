@@ -1,0 +1,12 @@
+.headline {
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.headline-image img {
+  width: 100px;
+  height: 80px;
+}

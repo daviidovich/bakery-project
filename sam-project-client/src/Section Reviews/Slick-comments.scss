@@ -1,0 +1,26 @@
+$beige: #e2a968;
+
+.slick-prev:before,
+.slick-next:before {
+  color: $beige;
+  font-size: 45px;
+}
+
+.slick-prev {
+  left: -45px;
+}
+
+.slick-track {
+  margin-bottom: 30px;
+}
+
+.slick-dots li button:before {
+  content: "-";
+  font-size: 100px;
+  color: #676767;
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: 1;
+  color: $beige;
+}
