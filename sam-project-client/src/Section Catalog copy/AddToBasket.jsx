@@ -6,7 +6,7 @@ import "../Basket/Basket.scss";
 
 var arrLS = JSON.parse(localStorage.getItem("itemById")) || [];
 
-export default class AddtoBasket extends React.Component {
+export class AddtoBasket extends React.Component {
   getProductId = async () => {
     const itemById = await api.getProductById(this.props.id);
     const item = itemById.data.data;
@@ -16,16 +16,16 @@ export default class AddtoBasket extends React.Component {
   addToLS = (item, arrLS) => {
     arrLS.push(item);
     localStorage.setItem("itemById", JSON.stringify(arrLS));
+    if (this.props.getArr) this.props.getArr(arrLS);
     alert(`Added ${item.product.name}`);
     console.log("arr", arrLS);
   };
+}
 
+export default class BtnAdd extends React.Component {
   render() {
     return (
-      <div
-        className="catalog-list-one__basket text"
-        onClick={this.getProductId}
-      >
+      <div className="catalog-list-one__basket text" onClick={AddtoBasket}>
         {BasketIcon}
       </div>
     );
@@ -105,27 +105,15 @@ export class BasketMarkup extends React.Component {
     };
   }
 
+  handleInsert = arr => {
+    this.setState({ items: arr });
+  };
+
   handleRemove = i => {
     arrLS.splice(i, 1);
     this.setState({ items: arrLS });
     localStorage.setItem("itemById", JSON.stringify(arrLS));
     if (this.props.hadUpdated) this.props.hadUpdated();
-  };
-
-  takePrice = price => {
-    const arrPrices = this.state.prices;
-    arrPrices.push(price);
-    console.log("takeprice", arrPrices);
-    this.totalPrice(arrPrices);
-  };
-
-  totalPrice = array => {
-    var sum = 0;
-    for (var i = 0; i < array.length; i++) {
-      sum += array[i];
-    }
-    console.log("total price", sum);
-    return sum;
   };
 
   render() {
@@ -139,16 +127,14 @@ export class BasketMarkup extends React.Component {
               <img src="/img/muffin.png" />
               <div>
                 <p className="text color-white">{items[i].product.name}</p>
-                <p className="text color-white">
-                  {this.takePrice(items[i].product.price)}
-                  {items[i].product.price}
-                </p>
+                <p className="text color-white">{items[i].product.price}</p>
               </div>
               <div className="btn-delete" onClick={this.handleRemove}></div>
             </div>
           );
         })}
-        <div className="total-price">Total price: {this.totalPrice}</div>
+        <div className="total-price">Total price: </div>
+        <AddtoBasket getArr={this.handleInsert} />
       </div>
     );
   }

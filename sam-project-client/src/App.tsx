@@ -8,7 +8,7 @@ import Navbar from "./Navbar/Navbar";
 import Banner from "./Banner/Banner";
 import Features from "./Section Features/Section Features";
 import History from "./Section History/Section History";
-import Catalog from "./Section Catalog/Section Catalog";
+import Catalog from "./Section Catalog copy/Section Catalog";
 import Offers from "./Section Offers/Section Offers";
 import Reviews from "./Section Reviews/Section Client-reviews";
 import Yandex from "./Section Map/Section Map";
