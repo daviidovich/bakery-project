@@ -101,9 +101,13 @@ export default class History extends React.Component<{}, mySt> {
     this.setState({ current: dataFromChild });
   };
 
+  setActive = (value: string) => {
+    this.setState({ current: value });
+  };
+
   render() {
     const data: HistoryElement = this.state.items[this.state.current];
-    const buttons = this.state.items;
+    const names = this.state.items;
 
     return (
       <div className="history" id="history">
@@ -118,10 +122,15 @@ export default class History extends React.Component<{}, mySt> {
           <div className="history__name">{name}</div>
           <div className="history__position">{position}</div>
           <div className="history__buttons flex-space-between">
-            {Object.keys(buttons).map((button: any, i: number) => {
+            {Object.keys(names).map((name: any, i: number) => {
               return (
                 <div key={i}>
-                  <HistoryButton swapFn={this.swapContent} info={button} />
+                  <HistoryButton
+                    toggler={this.swapContent}
+                    label={name}
+                    isActive={this.state.current === name}
+                    setActive={this.setActive}
+                  />
                 </div>
               );
             })}

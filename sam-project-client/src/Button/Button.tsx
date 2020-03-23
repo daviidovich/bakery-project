@@ -1,10 +1,22 @@
 import React from "react";
 import "./Button.css";
 
-class Button extends React.Component<{ label: any; onClick: any }> {
+import cx from "classnames";
+import { css } from "styled-components";
+
+class Button extends React.Component<{
+  label: any;
+  onClick: any;
+  isActive: boolean;
+}> {
   render() {
     return (
-      <div className="button flex-center" onClick={this.props.onClick}>
+      <div
+        className={cx("button flex-center", {
+          "button-brown-back": this.props.isActive
+        })}
+        onClick={this.props.onClick}
+      >
         <div className="button-label">{this.props.label}</div>
       </div>
     );

@@ -26,12 +26,10 @@
   margin: 5px 0px 50px;
 }
 
-.history__buttons {
-  width: 800px;
-}
+/* .history__buttons {
+} */
 
 .onbutton-content {
-  width: 1000px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

@@ -5,7 +5,7 @@ import { PhoneIcon, MapIcon, ClockIcon } from "../Another/Icons";
 
 import Lang from "./Lang";
 import Logo from "../Logo/Logo";
-import { Basket } from "../Section Catalog/AddToBasket";
+import { Basket } from "../Section Catalog copy/AddToBasket";
 
 function Header() {
   return (
@@ -25,7 +25,7 @@ function Header() {
           <div className="header-info__workTime text">
             {ClockIcon} 08:00 am - 08:30 pm
           </div>
-          <Basket />
+          <Basket model={"basket"} />
         </div>
       </div>
     </header>
