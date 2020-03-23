@@ -124,14 +124,13 @@ export default class History extends React.Component<{}, mySt> {
           <div className="history__buttons flex-space-between">
             {Object.keys(names).map((name: any, i: number) => {
               return (
-                <div key={i}>
-                  <HistoryButton
-                    toggler={this.swapContent}
-                    label={name}
-                    isActive={this.state.current === name}
-                    setActive={this.setActive}
-                  />
-                </div>
+                <HistoryButton
+                  key={i}
+                  toggler={this.swapContent}
+                  label={name}
+                  isActive={this.state.current === name}
+                  setActive={this.setActive}
+                />
               );
             })}
           </div>

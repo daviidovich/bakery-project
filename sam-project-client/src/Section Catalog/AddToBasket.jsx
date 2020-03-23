@@ -112,21 +112,21 @@ export class BasketMarkup extends React.Component {
     if (this.props.hadUpdated) this.props.hadUpdated();
   };
 
-  takePrice = price => {
-    const arrPrices = this.state.prices;
-    arrPrices.push(price);
-    console.log("takeprice", arrPrices);
-    this.totalPrice(arrPrices);
-  };
+  // takePrice = price => {
+  //   const arrPrices = this.state.prices;
+  //   arrPrices.push(price);
+  //   console.log("takeprice", arrPrices);
+  //   this.totalPrice(arrPrices);
+  // };
 
-  totalPrice = array => {
-    var sum = 0;
-    for (var i = 0; i < array.length; i++) {
-      sum += array[i];
-    }
-    console.log("total price", sum);
-    return sum;
-  };
+  // totalPrice = array => {
+  //   var sum = 0;
+  //   for (var i = 0; i < array.length; i++) {
+  //     sum += array[i];
+  //   }
+  //   console.log("total price", sum);
+  //   return sum;
+  // };
 
   render() {
     const items = this.props.items;
@@ -140,7 +140,7 @@ export class BasketMarkup extends React.Component {
               <div>
                 <p className="text color-white">{items[i].product.name}</p>
                 <p className="text color-white">
-                  {this.takePrice(items[i].product.price)}
+                  {/* {this.takePrice(items[i].product.price)} */}
                   {items[i].product.price}
                 </p>
               </div>
@@ -148,7 +148,7 @@ export class BasketMarkup extends React.Component {
             </div>
           );
         })}
-        <div className="total-price">Total price: {this.totalPrice}</div>
+        <div className="total-price">Total price:</div>
       </div>
     );
   }
