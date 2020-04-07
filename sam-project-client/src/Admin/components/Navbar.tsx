@@ -1,28 +1,33 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 
-import Logo from "./Logo";
-import Links from "./Links";
-
-const Container = styled.div.attrs({
-  className: "container"
-})``;
-
-const Nav = styled.nav.attrs({
-  className: "navbar navbar-expand-lg navbar-dark bg-dark"
-})`
-  margin-bottom: 20 px;
-`;
+import Logo from "../../Logo/Logo";
+import { Link } from "react-router-dom";
 
 class NavBar extends Component {
   render() {
     return (
-      <Container>
-        <Nav>
+      <nav className="nav" id="navbar">
+        <div className="nav-content flex-center">
           <Logo />
-          <Links />
-        </Nav>
-      </Container>
+          <ul className="nav-items flex-center">
+            <li className="nav-item text">
+              <Link to="/admhome/list" className="nav-link">
+                Products list
+              </Link>
+            </li>
+            <li className="nav-item text">
+              <Link to="/admhome/create" className="nav-link">
+                Create Product
+              </Link>
+            </li>
+            {/* <li className="nav-item text">
+              <Link to="/admhome/update/:id" className="nav-link">
+                Update Product
+              </Link>
+            </li> */}
+          </ul>
+        </div>
+      </nav>
     );
   }
 }

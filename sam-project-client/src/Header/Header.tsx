@@ -5,7 +5,7 @@ import { PhoneIcon, MapIcon, ClockIcon } from "../Another/Icons";
 
 import Lang from "./Lang";
 import Logo from "../Logo/Logo";
-import { Basket } from "../Section Catalog/AddToBasket";
+import { Basket } from "../Section Catalog copy/AddToBasket";
 
 function Header() {
   return (

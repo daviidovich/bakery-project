@@ -1,110 +1,105 @@
 import React, { Component } from "react";
 import api from "../api/api";
-import { useTable, useMemo } from "react-table";
 
-function Table({ columns, data }) {
-  // Use the state and functions returned from useTable to build your UI
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow
-  } = useTable({
-    columns,
-    data
-  });
+import Table from "react-bootstrap/Table";
+import styled from "styled-components";
 
-  // Render the UI for your table
-  return (
-    <table {...getTableProps()}>
-      <thead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map(cell => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  );
+const Update = styled.div`
+  color: #ef9b0f;
+  cursor: pointer;
+`;
+
+const Delete = styled.div`
+  color: #ff0000;
+  cursor: pointer;
+`;
+
+class UpdateProduct extends Component {
+  updateUser = event => {
+    event.preventDefault();
+
+    window.location.href = `/admhome/update/${this.props.id}`;
+  };
+
+  render() {
+    return <Update onClick={this.updateUser}>Update</Update>;
+  }
+}
+
+class DeleteProduct extends Component {
+  handleRemove = event => {
+    event.preventDefault();
+    if (window.confirm(`Do tou want to delete the product ${this.props.id}?`)) {
+      api.deleteProductById(this.props.id);
+      //window.location.reload();
+      if (this.props.updated) this.props.updated();
+    }
+  };
+  render() {
+    return <Delete onClick={this.handleRemove}>Delete</Delete>;
+  }
 }
 
 class ProductsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [],
-      columns: [],
-      isLoaded: false
+      items: []
     };
   }
   componentDidMount = async () => {
-    this.setState({ isLoaded: true });
     await api.getAllProducts().then(items => {
       this.setState({
-        items: items.data.data,
-        isLoaded: false
+        items: items.data.data
       });
     });
   };
 
   render() {
-    const { isLoaded, items } = this.state;
+    const items = this.state.items;
     console.log("итемы:", items);
 
-    // items.forEach(function(item, i, arr) {
-    //   console.log(
-    //     i + ": " + item._id + item.section + item.product.description
-    //   );
-    // });
-
-    const columns = [
-      {
-        Header: "ID",
-        accessor: "_id",
-        filterable: true
-      },
-      {
-        Header: "Section",
-        accessor: "section",
-        filterable: true
-      },
-      {
-        Header: "Image",
-        accessor: "imageS",
-        filterable: true
-      },
-      {
-        Header: "Desc",
-        accessor: "product.name"
-      }
-    ];
-    {
-      return (
-        <Table
-          data={items}
-          columns={columns}
-          loading={isLoaded}
-          defaultPageSize={10}
-          showPageSizeOptions={true}
-          minRows={0}
-        />
-      );
-    }
+    return (
+      <Table striped bordered hover size="sm">
+        <thead>
+          <tr className="text-center">
+            <th>№</th>
+            <th>ID</th>
+            <th>Section</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price, $</th>
+            <th>Discount, %</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.keys(items).map(i => {
+            return (
+              <tr key={i}>
+                <td>{i}</td>
+                <td>{items[i]._id}</td>
+                <td>{items[i].section}</td>
+                <td>{items[i].name}</td>
+                <td>{items[i].description}</td>
+                <td>{items[i].price}</td>
+                <td>{items[i].discount}</td>
+                <td>
+                  <DeleteProduct
+                    id={items[i]._id}
+                    updated={this.componentDidMount}
+                  />
+                </td>
+                <td>
+                  <UpdateProduct id={items[i]._id} />
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+    );
   }
 }
 

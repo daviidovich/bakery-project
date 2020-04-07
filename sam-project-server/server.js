@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const db = require("./db");
 const adminRouter = require("./routes/admin-router");
-const productRouter = require("./routes/product-router");
+const customRouter = require("./routes/custom-router");
 
 const app = express();
 const apiPort = 3000;
@@ -19,6 +19,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.use("/api", productRouter);
+app.use("/api", customRouter);
+app.use("/admin", adminRouter);
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));

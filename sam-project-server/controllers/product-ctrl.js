@@ -77,48 +77,51 @@ deleteProduct = async (req, res) => {
   }).catch(err => console.log(err));
 };
 
-// updateProduct = async (req, res) => {
-//   const body = req.body;
+updateProduct = async (req, res) => {
+  const body = req.body;
 
-//   if (!body) {
-//     return res.status(400).json({
-//       success: false,
-//       error: "You must provide a body to update"
-//     });
-//   }
+  if (!body) {
+    return res.status(400).json({
+      success: false,
+      error: "You must provide a body to update"
+    });
+  }
 
-//   Product.findOne({ _id: req.params.id }, (err, product) => {
-//     if (err) {
-//       return res.status(404).json({
-//         err,
-//         message: "Product not found!"
-//       });
-//     }
-//     product.name = body.name;
-//     product.description = body.description;
-//     product.discount = body.discount;
-//     product.price = body.price;
-//     product
-//       .save()
-//       .then(() => {
-//         return res.status(200).json({
-//           success: true,
-//           id: product._id,
-//           message: "Product updated!"
-//         });
-//       })
-//       .catch(error => {
-//         return res.status(404).json({
-//           error,
-//           message: "Product not updated!"
-//         });
-//       });
-//   });
-// };
+  Product.findOne({ _id: req.params.id }, (err, product) => {
+    if (err) {
+      return res.status(404).json({
+        err,
+        message: "Product not found!"
+      });
+    }
+    product.section = body.section;
+    product.name = body.name;
+    product.description = body.description;
+    product.price = body.price;
+    product.discount = body.discount;
+
+    product
+      .save()
+      .then(() => {
+        return res.status(200).json({
+          success: true,
+          id: product._id,
+          message: "Product updated!"
+        });
+      })
+      .catch(error => {
+        return res.status(404).json({
+          error,
+          message: "Product not updated!"
+        });
+      });
+  });
+};
 
 module.exports = {
   createProduct,
   getProducts,
   getProductById,
-  deleteProduct
+  deleteProduct,
+  updateProduct
 };

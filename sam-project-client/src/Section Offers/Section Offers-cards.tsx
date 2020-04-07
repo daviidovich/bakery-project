@@ -27,15 +27,22 @@ export default class OfferCards extends React.Component<{}, mySt> {
 
   generateRandom = () => {
     let items = this.state.items;
+
     var randomItems: any = [];
-    for (var i = 0; i < 4; i++) {
+    let i: number = 0;
+    do {
       var randItem = items[Math.floor(Math.random() * items.length)];
-      randomItems.push(randItem);
-    }
+      if (randItem.discount > 0) {
+        randomItems.push(randItem);
+      }
+      i++;
+    } while (randomItems.length < 4);
+
+    console.log("rand", randomItems);
     this.setState({
       random: randomItems
     });
-    return randomItems;
+    return this.state.random;
   };
 
   render() {
@@ -44,8 +51,8 @@ export default class OfferCards extends React.Component<{}, mySt> {
     return (
       <div className="offers-cards flex-space-between">
         {Object.keys(items).map((item: any, i: any) => {
-          let oldP = items[i].product.price;
-          let disc = items[i].product.discount;
+          let oldP = items[i].price;
+          let disc = items[i].discount;
           let newP = getNewPrice(oldP, disc);
           return (
             <div key={i} className="offers-card">
@@ -54,7 +61,7 @@ export default class OfferCards extends React.Component<{}, mySt> {
                   -{disc}%
                 </div>
                 <h3 className="offers-card__title color-brown">
-                  {items[i].product.name}
+                  {items[i].name}
                 </h3>
                 <p className="offers-card__text text">
                   Before <span className="line-through">{oldP}$</span> -{" "}

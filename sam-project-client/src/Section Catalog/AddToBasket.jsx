@@ -16,7 +16,7 @@ export default class AddtoBasket extends React.Component {
   addToLS = (item, arrLS) => {
     arrLS.push(item);
     localStorage.setItem("itemById", JSON.stringify(arrLS));
-    alert(`Added ${item.product.name}`);
+    alert(`Added ${item.name}`);
     console.log("arr", arrLS);
   };
 
@@ -138,10 +138,10 @@ export class BasketMarkup extends React.Component {
             <div key={i} className="mybasket-prod">
               <img src="/img/muffin.png" />
               <div>
-                <p className="text color-white">{items[i].product.name}</p>
+                <p className="text color-white">{items[i].name}</p>
                 <p className="text color-white">
-                  {/* {this.takePrice(items[i].product.price)} */}
-                  {items[i].product.price}
+                  {/* {this.takePrice(items[i].price)} */}
+                  {items[i].price}
                 </p>
               </div>
               <div className="btn-delete" onClick={this.handleRemove}></div>

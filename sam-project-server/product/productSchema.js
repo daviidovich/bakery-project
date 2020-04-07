@@ -4,14 +4,10 @@ const Schema = mongoose.Schema;
 const Product = new Schema(
   {
     section: String,
-    imageS: String,
-    product: {
-      name: String,
-      imageP: String,
-      description: String,
-      discount: Number,
-      price: Number
-    }
+    name: String,
+    description: String,
+    price: Number,
+    discount: Number
   },
   { versionKey: false }
 );

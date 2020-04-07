@@ -1,19 +1,19 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/api"
+  baseURL: "http://localhost:3000/admin"
 });
 
 //export const authoForm = () => api.get(`/`);
-export const makeAutho = () => api.post(`/`);
-export const getHomePage = () => api.get(`/`);
+export const makeAutho = payload => api.post(`/`, payload);
+export const getHomePage = () => api.get(`/admhome`);
 
-export const insertProduct = payload => api.post(`/product`, payload);
-export const getAllProducts = () => api.get(`/products`);
-export const updateMovieById = (id, payload) =>
-  api.put(`/products/${id}`, payload);
-export const deleteProductById = id => api.delete(`/product/${id}`);
-export const getProductsById = id => api.get(`/product/${id}`);
+export const insertProduct = payload => api.post(`/admhome/product`, payload);
+export const getAllProducts = () => api.get(`/admhome/products`);
+export const updateProductById = (id, payload) =>
+  api.put(`/admhome/product/${id}`, payload);
+export const deleteProductById = id => api.delete(`/admhome/product/${id}`);
+export const getProductById = id => api.get(`/admhome/product/${id}`);
 
 const apis = {
   //authoForm,
@@ -22,7 +22,7 @@ const apis = {
   insertProduct,
   getAllProducts,
   deleteProductById,
-  getProductsById
+  getProductById
 };
 
 export default apis;

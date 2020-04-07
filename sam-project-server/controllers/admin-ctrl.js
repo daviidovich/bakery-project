@@ -17,7 +17,7 @@ makeAuthorization = (req, res) => {
     }
     if (admin && admin.password === req.body.password) {
       console.log("User and password is correct");
-      res.status(200).getHomePage();
+      res.status(200).send("okey");
     } else {
       console.log("Credentials wrong");
       res.status(404).send("Login invalid");
@@ -26,7 +26,7 @@ makeAuthorization = (req, res) => {
 };
 
 getHomePage = (req, res) => {
-  res.redirect("/admin/home");
+  return res.status(200).redirect("/admhome");
 };
 
 module.exports = {

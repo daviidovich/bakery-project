@@ -5,55 +5,41 @@ import api from "../API/api";
 import "../Basket/Basket.scss";
 
 var arrLS = JSON.parse(localStorage.getItem("itemById")) || [];
-console.log(arrLS);
+console.log("start ArrLS", arrLS);
 
-// export default class BtnAdd extends React.Component {
-//   getProductId = async () => {
-//     const itemById = await api.getProductById(this.props.id);
-//     const item = itemById.data.data;
-//     this.addToLS(item, arrLS);
-//   };
-
-//   addToLS = (item, arrLS) => {
-//     arrLS.push(item);
-//     localStorage.setItem("itemById", JSON.stringify(arrLS));
-//     if (this.props.getArr) this.props.getArr(arrLS);
-//     alert(`Added ${item.product.name}`);
-//     console.log("arr", arrLS);
-//   };
-//   render() {
-//     return (
-//       <div
-//         className="catalog-list-one__basket text"
-//         onClick={this.getProductId}
-//       >
-//         {BasketIcon}
-//       </div>
-//     );
-//   }
-// }
-
-const BtnAdd = props => {
-  const getProductId = async () => {
-    const itemById = await api.getProductById(props.id);
+export default class BtnAdd extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [],
+      counter: 0
+    };
+  }
+  getProductId = async () => {
+    const itemById = await api.getProductById(this.props.id);
     const item = itemById.data.data;
-    addToLS(item, arrLS);
-    if (props.getNewArr) props.getNewArr(arrLS);
-    props.updateCounter();
+    this.addToLS(item);
   };
 
-  const addToLS = (item, arrLS) => {
+  addToLS = item => {
     arrLS.push(item);
+    alert(`Added ${item.name}`);
+    this.setState({ items: arrLS, counter: arrLS.length });
     localStorage.setItem("itemById", JSON.stringify(arrLS));
-    alert(`Added ${item.product.name}`);
-    console.log("arr", arrLS);
+    console.log("add", arrLS);
+    if (this.props.stateOfBasket) this.props.stateOfBasket();
   };
-  return (
-    <div className="catalog-list-one__basket text" onClick={getProductId}>
-      {BasketIcon}
-    </div>
-  );
-};
+  render() {
+    return (
+      <div
+        className="catalog-list-one__basket text"
+        onClick={this.getProductId}
+      >
+        {BasketIcon}
+      </div>
+    );
+  }
+}
 
 export class Basket extends React.Component {
   constructor(props) {
@@ -66,30 +52,32 @@ export class Basket extends React.Component {
   }
 
   componentDidMount() {
-    console.log("moUNT");
     this.setState({
       items: arrLS,
       counter: arrLS.length
     });
   }
 
-  updateCounter = () => {
-    console.log("Update");
+  stateOfBasket = () => {
+    console.log("coming arr", arrLS);
     const items = this.state.items;
-    console.log(this.state);
     this.setState({
-      // counter: items.length
       items: arrLS,
-      counter: arrLS.length
+      counter: arrLS.length,
+      shouldShowElem: true
     });
-    console.log(this.state);
+    if (this.state.shouldShowElem)
+      this.setState({
+        shouldShowElem: false
+      });
+    console.log("state of basket", this.state.items, this.state.counter);
   };
 
-  hoverOn = () => {
+  openBasket = () => {
     const items = this.state.items;
+    this.stateOfBasket();
     this.setState({
-      shouldShowElem: true,
-      counter: items.length
+      shouldShowElem: true
     });
     // if (this.state.shouldShowElem)
     //   this.setState({
@@ -97,30 +85,15 @@ export class Basket extends React.Component {
     //   });
   };
 
-  handleAdd = arr => {
-    this.setState({
-      items: arr
-    });
-  };
-
-  // hoverOff = () => {
-  //   const items = this.state.items;
-  //   this.setState({
-  //     shouldShowElem: false,
-  //     counter: items.length
-  //   });
-  // };
-
   render() {
-    // const items = this.state.items;
-    // const counter = this.state.counter;
-    // console.log("basket", items, counter);
-    console.log(this.state);
+    const items = this.state.items;
+    const counter = this.state.counter;
+
     if (this.props.model === "basket") {
       return (
         <div
           className="header-info__basket text flex-center"
-          onClickCapture={this.hoverOn}
+          onClick={this.openBasket}
           // onMouseOut={this.hoverOff}
         >
           {BasketIcon}
@@ -130,19 +103,13 @@ export class Basket extends React.Component {
           {this.state.shouldShowElem && (
             <BasketMarkup
               items={this.state.items}
-              hadUpdated={this.updateCounter}
+              stateOfBasket={this.stateOfBasket}
             />
           )}
         </div>
       );
     } else if (this.props.model === "addToCart") {
-      return (
-        <BtnAdd
-          id={this.props.id}
-          updateCounter={this.updateCounter}
-          getNewArr={this.handleAdd}
-        />
-      );
+      return <BtnAdd id={this.props.id} stateOfBasket={this.stateOfBasket} />;
     } else return true;
   }
 }
@@ -152,20 +119,36 @@ export class BasketMarkup extends React.Component {
     super(props);
     this.state = {
       items: [],
-      prices: []
+      counter: 0
     };
   }
 
   handleRemove = i => {
     arrLS.splice(i, 1);
-    this.setState({ items: arrLS });
+    this.setState({ items: arrLS, counter: arrLS.length });
     localStorage.setItem("itemById", JSON.stringify(arrLS));
-    if (this.props.hadUpdated) this.props.hadUpdated();
+    console.log("delete", arrLS);
+    if (this.props.stateOfBasket) this.props.stateOfBasket();
+  };
+
+  stateOfMarkup = arrLS => {
+    console.log("coming arr markup", arrLS);
+    const items = this.state.items;
+    this.setState({
+      items: arrLS,
+      counter: arrLS.length
+    });
+    console.log("state of markup", this.state.items, this.state.counter);
   };
 
   render() {
     const items = this.props.items;
-
+    let i = 0;
+    function countTotalPrice() {
+      let totalPrice = totalPrice + arrLS[i].price;
+      console.log(totalPrice);
+      return totalPrice;
+    }
     return (
       <div className="mybasket">
         {Object.keys(items).map(i => {
@@ -173,14 +156,14 @@ export class BasketMarkup extends React.Component {
             <div key={i} className="mybasket-prod">
               <img src="/img/muffin.png" />
               <div>
-                <p className="text color-white">{items[i].product.name}</p>
-                <p className="text color-white">{items[i].product.price}</p>
+                <p className="text color-white">{items[i].name}</p>
+                <p className="text color-white">{items[i].price}</p>
               </div>
               <div className="btn-delete" onClick={this.handleRemove}></div>
             </div>
           );
         })}
-        <div className="total-price">Total price: </div>
+        <div className="total-price">Total price:</div>
       </div>
     );
   }

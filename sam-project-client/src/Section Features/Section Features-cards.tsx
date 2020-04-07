@@ -55,7 +55,7 @@ class FeaturesList extends React.Component<{}, mySt> {
                         Baker & {filteredItems[i].section}
                       </h3>
                       <div className="text-center text">
-                        {filteredItems[i].product.description}
+                        {filteredItems[i].description}
                       </div>
                     </div>
                   </div>

@@ -5,7 +5,7 @@ import Headline from "../Another/Sections headline";
 import image from "./bagel.png";
 import NavBySection from "./NavBySection";
 import { BasketIcon } from "../Another/Icons";
-// import BtnAdd from "./AddToBasket";
+import Btn from "./AddToBasket";
 import { Basket } from "./AddToBasket";
 
 // interface mySt {
@@ -65,11 +65,9 @@ class Catalog extends React.Component {
                     {/* <BtnAdd id={items[i]._id} /> */}
                     <Basket model={"addToCart"} id={items[i]._id} />
                     <img src={image} className="catalog-list-one__img" />
-                    <h3 className="color-brown">{items[i].product.name}</h3>
+                    <h3 className="color-brown">{items[i].name}</h3>
                     <p className="text">{items[i].section}</p>
-                    <p className="text color-red">
-                      ${items[i].product.price}.00
-                    </p>
+                    <p className="text color-red">${items[i].price}.00</p>
                   </div>
                 );
               })}

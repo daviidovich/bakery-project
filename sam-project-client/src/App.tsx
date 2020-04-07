@@ -1,38 +1,29 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
 
+import CustomApp from "./Custom/CustomApp";
 import Authorization from "./Admin/components/authorization";
-import Header from "./Header/Header";
-import Navbar from "./Navbar/Navbar";
-import Banner from "./Banner/Banner";
-import Features from "./Section Features/Section Features";
-import History from "./Section History/Section History";
-import Catalog from "./Section Catalog/Section Catalog";
-import Offers from "./Section Offers/Section Offers";
-import Reviews from "./Section Reviews/Section Client-reviews";
-import Yandex from "./Section Map/Section Map";
-import Footer from "./Footer/Footer";
+import AdminApp from "./Admin/app/App";
 
 class App extends React.PureComponent {
   render() {
     return (
-      <div>
-        {/* <Router>
-          <Route path="/admin" exact component={Authorization} />
-        </Router> */}
-        <div className="App">
-          <Header />
-          <Navbar />
-          <Banner />
-          <Features />
-          <History />
-          <Catalog />
-          <Offers />
-          <Reviews />
-          <Yandex />
-          <Footer />
-        </div>
+      <div className="App">
+        <Router>
+          <Switch>
+            <Route path="/" exact component={CustomApp} />
+            <Route path="/admin">
+              <Authorization />
+            </Route>
+            <Route path="/admhome" exact component={AdminApp} />
+          </Switch>
+        </Router>
       </div>
     );
   }

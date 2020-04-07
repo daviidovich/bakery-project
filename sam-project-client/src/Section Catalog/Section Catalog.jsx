@@ -64,11 +64,9 @@ class Catalog extends React.Component {
                   <div key={i} className="catalog-list-one flex-center">
                     <AddToBasket id={items[i]._id} />
                     <img src={image} className="catalog-list-one__img" />
-                    <h3 className="color-brown">{items[i].product.name}</h3>
+                    <h3 className="color-brown">{items[i].name}</h3>
                     <p className="text">{items[i].section}</p>
-                    <p className="text color-red">
-                      ${items[i].product.price}.00
-                    </p>
+                    <p className="text color-red">${items[i].price}.00</p>
                   </div>
                 );
               })}
