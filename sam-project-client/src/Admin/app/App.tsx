@@ -14,18 +14,10 @@ class AdminApp extends React.Component {
         <Router>
           <NavBar />
           <Switch>
+            <Route path="/admhome/list" exact component={ProductsList} />
+            <Route path="/admhome/create" exact component={ProductsInsert} />
             <Route
-              path="/admhome/products/list"
-              exact
-              component={ProductsList}
-            />
-            <Route
-              path="/admhome/products/create"
-              exact
-              component={ProductsInsert}
-            />
-            <Route
-              path="/admhome/products/update/:id"
+              path="/admhome/update/:id"
               exact
               component={ProductsUpdate}
             />

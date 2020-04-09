@@ -141,14 +141,28 @@ export class BasketMarkup extends React.Component {
     console.log("state of markup", this.state.items, this.state.counter);
   };
 
+  // countTotalPrice = () => {
+  //   let totalPriceArr = [];
+  //   arrLS.forEach(function(item, i) {
+  //     totalPriceArr.push(item.price);
+  //   });
+  //   console.log("array sum", totalPriceArr);
+
+  //   var result = 0;
+  //   for (var i = 0; i < totalPriceArr.length; i++) {
+  //     result += totalPriceArr[i];
+  //   }
+  //   console.log("summa", result);
+  //   Returnresult();
+  //   var Returnresult = function() {
+  //     return <span>{result}</span>;
+  //   };
+  //   return <Returnresult />;
+  // };
+
   render() {
     const items = this.props.items;
-    let i = 0;
-    function countTotalPrice() {
-      let totalPrice = totalPrice + arrLS[i].price;
-      console.log(totalPrice);
-      return totalPrice;
-    }
+
     return (
       <div className="mybasket">
         {Object.keys(items).map(i => {
@@ -157,14 +171,37 @@ export class BasketMarkup extends React.Component {
               <img src="/img/muffin.png" />
               <div>
                 <p className="text color-white">{items[i].name}</p>
-                <p className="text color-white">{items[i].price}</p>
+                <p className="text color-white">${items[i].price}</p>
               </div>
               <div className="btn-delete" onClick={this.handleRemove}></div>
             </div>
           );
         })}
-        <div className="total-price">Total price:</div>
+        <TotalPrice />
       </div>
     );
+  }
+}
+
+class TotalPrice extends React.Component {
+  render() {
+    let totalPriceArr = [];
+    arrLS.forEach(function(item, i) {
+      totalPriceArr.push(item.price);
+    });
+
+    var result = 0;
+    for (var i = 0; i < totalPriceArr.length; i++) {
+      result += totalPriceArr[i];
+    }
+    if (arrLS != 0) {
+      return (
+        <div className="total-price">
+          Total price: <span>${result}</span>
+        </div>
+      );
+    } else {
+      return <div className="total-price">В корзине пусто!</div>;
+    }
   }
 }

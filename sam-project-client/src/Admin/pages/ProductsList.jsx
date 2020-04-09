@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import api from "../api/api";
+import { Link } from "react-router-dom";
 
 import Table from "react-bootstrap/Table";
 import styled from "styled-components";
@@ -16,9 +17,17 @@ const Delete = styled.div`
 
 class UpdateProduct extends Component {
   updateUser = event => {
-    event.preventDefault();
+    //event.preventDefault();
+    //window.location.href = `/admhome/update/${this.props.id}`;
 
-    window.location.href = `/admhome/update/${this.props.id}`;
+    if (window.confirm(`Do tou want to update the product ${this.props.id}?`)) {
+      return (
+        <Link
+          to={`/admhome/update/${this.props.id}`}
+          className="nav-link"
+        ></Link>
+      );
+    }
   };
 
   render() {

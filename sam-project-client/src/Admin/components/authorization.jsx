@@ -59,14 +59,12 @@ class Authorization extends React.Component {
   }
 
   handleChangeInputLogin = async event => {
-    console.log(event.target.value);
     const login = event.target.value;
     this.setState({ login });
   };
 
   handleChangeInputPassword = async event => {
     var password = event.target.value;
-    console.log(password);
     this.setState({ password });
   };
 
@@ -78,11 +76,7 @@ class Authorization extends React.Component {
 
     api.makeAutho(payload).then(res => {
       if (res.status === 200) {
-        console.log("result", res);
-        this.setState({
-          isLoggedIn: true
-        });
-        alert("welcome!");
+        console.log("makeautho", res);
       }
     });
   };

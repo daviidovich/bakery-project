@@ -47,11 +47,11 @@ const CancelButton = styled.a.attrs({
   margin: 15px 15px 15px 5px;
 `;
 
-class ProductsUpdate extends Component {
+class ProductsUpdate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.match.params._id,
+      id: this.props.match.params.id,
       section: "",
       name: "",
       description: "",

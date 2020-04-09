@@ -10,8 +10,13 @@ import {
 import CustomApp from "./Custom/CustomApp";
 import Authorization from "./Admin/components/authorization";
 import AdminApp from "./Admin/app/App";
+import {
+  ProductsList,
+  ProductsInsert,
+  ProductsUpdate
+} from "./Admin/pages/pages";
 
-class App extends React.PureComponent {
+class App extends React.Component {
   render() {
     return (
       <div className="App">

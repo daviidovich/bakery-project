@@ -6,14 +6,14 @@ const api = axios.create({
 
 //export const authoForm = () => api.get(`/`);
 export const makeAutho = payload => api.post(`/`, payload);
-export const getHomePage = () => api.get(`/admhome`);
+export const getHomePage = () => api.get(`/gethome`);
 
-export const insertProduct = payload => api.post(`/admhome/product`, payload);
-export const getAllProducts = () => api.get(`/admhome/products`);
+export const insertProduct = payload => api.post(`/product`, payload);
+export const getAllProducts = () => api.get(`/list`);
 export const updateProductById = (id, payload) =>
-  api.put(`/admhome/product/${id}`, payload);
-export const deleteProductById = id => api.delete(`/admhome/product/${id}`);
-export const getProductById = id => api.get(`/admhome/product/${id}`);
+  api.put(`/product/${id}`, payload);
+export const deleteProductById = id => api.delete(`/product/${id}`);
+export const getProductById = id => api.get(`/product/${id}`);
 
 const apis = {
   //authoForm,
@@ -22,7 +22,8 @@ const apis = {
   insertProduct,
   getAllProducts,
   deleteProductById,
-  getProductById
+  getProductById,
+  updateProductById
 };
 
 export default apis;

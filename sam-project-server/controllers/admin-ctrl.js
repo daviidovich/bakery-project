@@ -26,7 +26,7 @@ makeAuthorization = (req, res) => {
 };
 
 getHomePage = (req, res) => {
-  return res.status(200).redirect("/admhome");
+  res.status(200).redirect("/admhome");
 };
 
 module.exports = {
