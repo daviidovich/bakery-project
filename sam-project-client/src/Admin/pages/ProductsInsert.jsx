@@ -5,45 +5,45 @@ import api from "../api/api";
 import styled from "styled-components";
 
 const Title = styled.h1.attrs({
-  className: "h1 color-brown"
+  className: "h1 color-brown",
 })`
   margin-bottom: 1.5rem;
 `;
 
 const Wrapper = styled.form.attrs({
-  className: "form-group"
+  className: "form-group",
 })`
   margin: 30px 100px;
 `;
 
 const Label = styled.label.attrs({
-  className: "text"
+  className: "text",
 })`
   margin: 5px;
 `;
 
 const Select = styled.select.attrs({
-  className: "form-control"
+  className: "form-control",
 })`
   margin: 5px;
   width: 400px;
 `;
 
 const InputText = styled.input.attrs({
-  className: "form-control"
+  className: "form-control",
 })`
   margin: 5px;
   width: 400px;
 `;
 
 const Button = styled.button.attrs({
-  className: `btn btn-primary`
+  className: `btn btn-primary`,
 })`
   margin: 15px 15px 15px 5px;
 `;
 
 const CancelButton = styled.a.attrs({
-  className: `btn btn-danger`
+  className: `btn btn-danger`,
 })`
   margin: 15px 15px 15px 5px;
 `;
@@ -66,30 +66,30 @@ class ProductsInsert extends React.Component {
       name: "",
       description: "",
       price: "",
-      discount: ""
+      discount: "",
     };
   }
 
-  handleChangeInputSection = async event => {
+  handleChangeInputSection = async (event) => {
     console.log(event.target.value);
     const section = event.target.value;
     this.setState({ section });
   };
 
-  handleChangeInputName = async event => {
+  handleChangeInputName = async (event) => {
     var name =
       event.target.value[0].toUpperCase() + event.target.value.slice(1);
     console.log(name);
     this.setState({ name });
   };
 
-  handleChangeInputDesc = async event => {
+  handleChangeInputDesc = async (event) => {
     //this.value = this.value[0].toUpperCase() + this.value.slice(1);
     const description = event.target.value;
     this.setState({ description });
   };
 
-  handleChangeInputPrice = async event => {
+  handleChangeInputPrice = async (event) => {
     const price = event.target.validity.valid
       ? event.target.value
       : this.state.price;
@@ -97,7 +97,7 @@ class ProductsInsert extends React.Component {
     this.setState({ price });
   };
 
-  handleChangeInputDiscount = async event => {
+  handleChangeInputDiscount = async (event) => {
     const discount = event.target.validity.valid
       ? event.target.value
       : this.state.discount;
@@ -109,14 +109,14 @@ class ProductsInsert extends React.Component {
     const { section, name, description, discount, price } = this.state;
     const payload = { section, name, description, discount, price };
 
-    await api.insertProduct(payload).then(res => {
+    await api.insertProduct(payload).then((res) => {
       window.alert(`Product inserted successfully`);
       this.setState({
         section: "",
         name: "",
         description: "",
         discount: "",
-        price: ""
+        price: "",
       });
     });
   };

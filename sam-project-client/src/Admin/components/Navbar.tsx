@@ -20,6 +20,12 @@ class NavBar extends Component {
                 Create Product
               </Link>
             </li>
+
+            <li className="nav-item text">
+              <Link to="/admhome/orders" className="nav-link">
+                Orders List
+              </Link>
+            </li>
             {/* <li className="nav-item text">
               <Link to="/admhome/update/:id" className="nav-link">
                 Update Product

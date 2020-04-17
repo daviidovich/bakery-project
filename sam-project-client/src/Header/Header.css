@@ -1,6 +1,7 @@
 .header {
   height: 170px;
   padding: 0px 90px;
+  border-bottom: 2px solid #eaeae8;
 }
 .header-info {
   display: flex;

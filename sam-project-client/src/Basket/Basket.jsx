@@ -1,56 +1,127 @@
 import React from "react";
 import "./Basket.scss";
-import { BasketIcon } from "../Another/Icons";
+import BasketItem from "./BasketItem";
+import UserDataForm from "./UserDataForm";
+import "./CartPage.scss";
+import { arrLS } from "../Section Catalog copy/AddToBasket";
+import api from "../API/api";
+//import { browserHistory } from "react-router-dom";
 
-let itemFromLS = JSON.parse(window.localStorage.getItem("itemById")) || [];
+var orderArr = [];
 
-// interface mySt {
-//   items: any;
-// }
-
-// interface stLS {
-//   obj: any;
-// }
-
-export default class Basket extends React.Component {
+export default class BasketPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      name: "",
+      address: "",
+      phone: "",
+      info: "",
+      payment: "",
+      //userData: {},
+      totalPrice: 0,
     };
+
+    this.cartItemsComponents = arrLS.map((cartItem) => {
+      console.log("cartItem", cartItem);
+      return (
+        <BasketItem
+          setItemQuantity={this.setItemQuantity}
+          item={cartItem}
+          key={cartItem.item._id}
+        />
+      );
+    });
   }
 
-  handleClick = event => {
-    return <div className="basket-hidden"></div>;
+  componentDidMount = () => {
+    this.setTotalPrice();
+    this.setCartItems();
   };
 
-  //   handleRemove(i: any) {
-  //     // Create a new array without the clicked item
-  //     var newItems = this.state.items;
-  //     newItems.splice(i, 1);
-  //     // Set the new state
-  //     this.setState({ items: newItems });
-  //   }
+  setCartItems = () => {
+    this.setState({ items: arrLS });
+  };
 
-  getFromLS = () => {
-    console.log("fromLS", itemFromLS);
+  setTotalPrice = () => {
+    let totalPrice = 0;
+    arrLS.forEach((item) => {
+      totalPrice += item.item.price * item.quantity;
+    });
+
     this.setState({
-      items: itemFromLS
+      totalPrice: totalPrice,
+    });
+  };
+
+  setItemQuantity = (id, quantity) => {
+    let items = this.state.items;
+    let item = arrLS.find((elem) => elem.item._id === id);
+    item.quantity = quantity;
+    this.setTotalPrice();
+    // Update state
+
+    localStorage.setItem("itemById", JSON.stringify(arrLS));
+    this.setCartItems();
+    console.log("updated arrls", arrLS);
+  };
+
+  setUserData = (data) => {
+    //const userData = data;
+    this.setState({
+      name: data.name,
+      address: data.address,
+      phone: data.phone,
+      info: data.info,
+      payment: data.payment,
+    });
+    //this.setState({ userData: data });
+    let timer = setTimeout(() => this.creatingOrder(), 1000);
+  };
+
+  creatingOrder = () => {
+    console.log("order", this.state);
+    const {
+      items,
+      name,
+      address,
+      phone,
+      info,
+      payment,
+      totalPrice,
+    } = this.state;
+    const payload = { items, name, address, phone, info, payment, totalPrice };
+
+    api.makeOrder(payload).then((res) => {
+      window.alert(`Order fixed`);
+      // this.setState({
+      //   items: items,
+      //   userData: userData,
+      //   totalPrice: totalPrice,
+      // });
     });
   };
 
   render() {
-    const items = this.state.items;
-    console.log("basket", items);
     return (
-      <div
-        className="header-info__basket text flex-center"
-        onClick={this.getFromLS}
-      >
-        {BasketIcon}
-        <div className="basket-counter flex-center color-white">
-          {/* {this.state.counter} */}
+      <div className="cart-page">
+        <h1 className="color-brown">My Basket</h1>
+        <div className="cart-page-content">
+          <div className="cart-page-userdata cart-item">
+            <UserDataForm userData={this.setUserData} />
+          </div>
+          <div className="cart-page-list">
+            <div className="cart-page-list-products">
+              {this.cartItemsComponents}
+            </div>
+            <h4 className="color-brown">
+              Total price: ${this.state.totalPrice}
+            </h4>
+          </div>
         </div>
+
+        {this.props.children}
       </div>
     );
   }

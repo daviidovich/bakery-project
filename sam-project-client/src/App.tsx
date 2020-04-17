@@ -4,7 +4,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 
 import CustomApp from "./Custom/CustomApp";
@@ -13,23 +13,36 @@ import AdminApp from "./Admin/app/App";
 import {
   ProductsList,
   ProductsInsert,
-  ProductsUpdate
+  ProductsUpdate,
+  OrdersList,
 } from "./Admin/pages/pages";
+import BasketPage from "./Basket/Basket";
+import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
 
 class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <Router>
-          <Switch>
+      <Router>
+        <div className="App">
+          <Header />
+          <div className="content">
             <Route path="/" exact component={CustomApp} />
-            <Route path="/admin">
-              <Authorization />
-            </Route>
-            <Route path="/admhome" exact component={AdminApp} />
-          </Switch>
-        </Router>
-      </div>
+            <Route path="/basket" exact component={BasketPage} />
+            <Route path="/admin" exact component={Authorization} />
+            <Route path="/admhome" exact component={AdminApp}></Route>
+            <Route path="/admhome/list" exact component={ProductsList} />
+            <Route path="/admhome/create" exact component={ProductsInsert} />
+            <Route
+              path="/admhome/update/:id"
+              exact
+              component={ProductsUpdate}
+            />
+            <Route path="/admhome/orders" exact component={OrdersList} />
+          </div>
+          <Footer />
+        </div>
+      </Router>
     );
   }
 }

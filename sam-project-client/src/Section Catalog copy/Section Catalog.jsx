@@ -5,50 +5,50 @@ import Headline from "../Another/Sections headline";
 import image from "./bagel.png";
 import NavBySection from "./NavBySection";
 import { BasketIcon } from "../Another/Icons";
-import Btn from "./AddToBasket";
+import Btn, { BasketMarkup } from "./AddToBasket";
 import { Basket } from "./AddToBasket";
+import { getNewPrice } from "../Another/CountPrice";
 
 // interface mySt {
 //   items: any;
 // }
 
-class Catalog extends React.Component {
+export default class Catalog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       items: [],
-      itemsToShow: []
+      itemsToShow: [],
     };
   }
 
   componentDidMount = async () => {
-    await api.getAllProducts().then(items => {
+    await api.getAllProducts().then((items) => {
       this.setState({
         items: items.data.data,
-        itemsToShow: items.data.data
+        itemsToShow: items.data.data,
       });
     });
   };
 
-  filterCatalogSections = value => {
+  filterCatalogSections = (value) => {
     if (value === "Show All") {
       this.setState({
-        itemsToShow: this.state.items
+        itemsToShow: this.state.items,
       });
       return this.state.items;
     }
     const items = this.state.items;
-    let filterItems = items.filter(function(item) {
+    let filterItems = items.filter(function (item) {
       return item.section === value;
     });
     this.setState({
-      itemsToShow: filterItems
+      itemsToShow: filterItems,
     });
     return filterItems;
   };
 
   render() {
-    const items = this.state.itemsToShow;
     return (
       <div className="catalog" id="catalog">
         <Headline label="Seller Products" />
@@ -58,20 +58,7 @@ class Catalog extends React.Component {
             getNavValue={this.filterCatalogSections}
           />
           <div className="catalog-list">
-            <div className="catalog-list-content">
-              {Object.keys(items).map(i => {
-                return (
-                  <div key={i} className="catalog-list-one flex-center">
-                    {/* <BtnAdd id={items[i]._id} /> */}
-                    <Basket model={"addToCart"} id={items[i]._id} />
-                    <img src={image} className="catalog-list-one__img" />
-                    <h3 className="color-brown">{items[i].name}</h3>
-                    <p className="text">{items[i].section}</p>
-                    <p className="text color-red">${items[i].price}.00</p>
-                  </div>
-                );
-              })}
-            </div>
+            <CatalogCart items={this.state.itemsToShow} />
           </div>
         </div>
       </div>
@@ -79,4 +66,57 @@ class Catalog extends React.Component {
   }
 }
 
-export default Catalog;
+export class CatalogCart extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [],
+      itemsToShow: [],
+    };
+  }
+
+  render() {
+    const items = this.props.items;
+
+    return (
+      <div className="catalog-list-content">
+        {Object.keys(items).map((i) => {
+          let priceWithDiscount = getNewPrice(
+            items[i].price,
+            items[i].discount
+          );
+          if (items[i].discount === 0) {
+            return (
+              <div key={i} className="catalog-list-one flex-center">
+                <div className="catalog-list-one__hot flex-center color-white">
+                  HOT
+                </div>
+                <img src={image} className="catalog-list-one__img" />
+                <h3 className="color-brown">{items[i].name}</h3>
+                <p className="text">{items[i].section}</p>
+                <p className="text color-red">${items[i].price}.00</p>
+                <Basket model={"addToCart"} id={items[i]._id} />
+              </div>
+            );
+          } else {
+            return (
+              <div key={i} className="catalog-list-one flex-center">
+                <div className="catalog-list-one__discount flex-center color-white">
+                  -{items[i].discount}%
+                </div>
+                <img src={image} className="catalog-list-one__img" />
+                <h3 className="color-brown">{items[i].name}</h3>
+                <p className="text">{items[i].section}</p>
+                <p className="text color-red">
+                  <span className="line-through">${items[i].price}.00</span> - $
+                  {priceWithDiscount}
+                </p>
+                <Basket model={"addToCart"} id={items[i]._id} />
+              </div>
+            );
+          }
+        })}
+      </div>
+    );
+  }
+}

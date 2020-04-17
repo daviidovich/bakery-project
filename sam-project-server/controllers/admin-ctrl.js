@@ -1,11 +1,12 @@
 const db = require("../db/index");
+const Order = require("../admin/orderSchema");
 
 // getPageAutho = (req, res) => {
 //   res.sendFile(__dirname + "/authorization.html");
 // };
 
 makeAuthorization = (req, res) => {
-  db.collection("admins").findOne({ login: req.body.login }, function(
+  db.collection("admins").findOne({ login: req.body.login }, function (
     err,
     admin
   ) {
@@ -29,8 +30,21 @@ getHomePage = (req, res) => {
   res.status(200).redirect("/admhome");
 };
 
+getOrders = async (req, res) => {
+  await Order.find({}, (err, orders) => {
+    if (err) {
+      return res.status(400).json({ success: false, error: err });
+    }
+    if (!orders.length) {
+      return res.status(404).json({ success: false, error: `Order not found` });
+    }
+    return res.status(200).json({ success: true, data: orders });
+  }).catch((err) => console.log(err));
+};
+
 module.exports = {
   //getPageAutho,
   makeAuthorization,
-  getHomePage
+  getHomePage,
+  getOrders,
 };

@@ -1,11 +1,12 @@
 const Product = require("../product/productSchema");
+const Order = require("../admin/orderSchema");
 
 createProduct = (req, res) => {
   const body = req.body;
   if (!body) {
     return res.status(400).json({
       success: false,
-      error: "You must provide a product"
+      error: "You must provide a product",
     });
   }
 
@@ -21,13 +22,13 @@ createProduct = (req, res) => {
       return res.status(201).json({
         success: true,
         id: product._id,
-        message: "Product created!"
+        message: "Product created!",
       });
     })
-    .catch(error => {
+    .catch((error) => {
       return res.status(400).json({
         error,
-        message: "Product not created!"
+        message: "Product not created!",
       });
     });
 };
@@ -43,7 +44,7 @@ getProducts = async (req, res) => {
         .json({ success: false, error: `Product not found` });
     }
     return res.status(200).json({ success: true, data: products });
-  }).catch(err => console.log(err));
+  }).catch((err) => console.log(err));
 };
 
 getProductById = async (req, res) => {
@@ -58,7 +59,7 @@ getProductById = async (req, res) => {
         .json({ success: false, error: `Product not found` });
     }
     return res.status(200).json({ success: true, data: product });
-  }).catch(err => console.log(err));
+  }).catch((err) => console.log(err));
 };
 
 deleteProduct = async (req, res) => {
@@ -74,7 +75,7 @@ deleteProduct = async (req, res) => {
     }
 
     return res.status(200).json({ success: true, data: product });
-  }).catch(err => console.log(err));
+  }).catch((err) => console.log(err));
 };
 
 updateProduct = async (req, res) => {
@@ -83,7 +84,7 @@ updateProduct = async (req, res) => {
   if (!body) {
     return res.status(400).json({
       success: false,
-      error: "You must provide a body to update"
+      error: "You must provide a body to update",
     });
   }
 
@@ -91,7 +92,7 @@ updateProduct = async (req, res) => {
     if (err) {
       return res.status(404).json({
         err,
-        message: "Product not found!"
+        message: "Product not found!",
       });
     }
     product.section = body.section;
@@ -106,16 +107,48 @@ updateProduct = async (req, res) => {
         return res.status(200).json({
           success: true,
           id: product._id,
-          message: "Product updated!"
+          message: "Product updated!",
         });
       })
-      .catch(error => {
+      .catch((error) => {
         return res.status(404).json({
           error,
-          message: "Product not updated!"
+          message: "Product not updated!",
         });
       });
   });
+};
+
+makeOrder = async (req, res) => {
+  const body = req.body;
+  if (!body) {
+    return res.status(400).json({
+      success: false,
+      error: "You must provide an order",
+    });
+  }
+
+  const order = new Order(body);
+
+  if (!order) {
+    return res.status(400).json({ success: false, error: err });
+  }
+
+  order
+    .save()
+    .then(() => {
+      return res.status(201).json({
+        success: true,
+        id: order._id,
+        message: "Order created!",
+      });
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        error,
+        message: "Order not created!",
+      });
+    });
 };
 
 module.exports = {
@@ -123,5 +156,6 @@ module.exports = {
   getProducts,
   getProductById,
   deleteProduct,
-  updateProduct
+  updateProduct,
+  makeOrder,
 };

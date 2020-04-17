@@ -1,0 +1,25 @@
+.cart-page {
+  padding: 80px;
+}
+
+.cart-page-content {
+  display: flex;
+  justify-content: space-around;
+  padding: 50px;
+}
+
+.cart-page-list-products {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.cart-page-userdata {
+  display: flex;
+  width: 700px;
+  position: relative;
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid #ebeced;
+  border-radius: 10px;
+  background-color: white;
+}

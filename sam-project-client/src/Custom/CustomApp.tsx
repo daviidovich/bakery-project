@@ -16,7 +16,6 @@ class CustomApp extends React.PureComponent {
   render() {
     return (
       <div className="CustomApp">
-        <Header />
         <Navbar />
         <Banner />
         <Features />
@@ -25,7 +24,6 @@ class CustomApp extends React.PureComponent {
         <Offers />
         <Reviews />
         <Yandex />
-        <Footer />
       </div>
     );
   }

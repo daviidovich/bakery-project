@@ -3,43 +3,79 @@ import { BasketIcon } from "../Another/Icons";
 import image from "./bagel.png";
 import api from "../API/api";
 import "../Basket/Basket.scss";
+import { Link } from "react-router-dom";
+import OpenedBasket from "../Basket/Basket";
+import Button from "../Button/Button";
 
-var arrLS = JSON.parse(localStorage.getItem("itemById")) || [];
+export var arrLS = JSON.parse(localStorage.getItem("itemById")) || [];
 console.log("start ArrLS", arrLS);
 
-export default class BtnAdd extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: [],
-      counter: 0
-    };
+function BasketCounter() {
+  let counterArr = [];
+  arrLS.forEach(function (item, i) {
+    counterArr.push(item.quantity);
+  });
+
+  var result = 0;
+  for (var i = 0; i < counterArr.length; i++) {
+    result += counterArr[i];
   }
-  getProductId = async () => {
+  console.log("counter", result);
+  return <div className="basket-counter flex-center color-white">{result}</div>;
+}
+
+export default class BtnAdd extends React.Component {
+  // getProductId = async () => {
+
+  //   this.addToLS(item);
+  // };
+
+  addToLS = async () => {
     const itemById = await api.getProductById(this.props.id);
     const item = itemById.data.data;
-    this.addToLS(item);
-  };
 
-  addToLS = item => {
-    arrLS.push(item);
+    let id = this.props.id;
+    let addedItem = arrLS.find((elem) => elem.item._id === id);
+
+    if (addedItem) {
+      addedItem.quantity = addedItem.quantity + 1;
+    } else {
+      arrLS.push({
+        item: item,
+        quantity: 1,
+      });
+    }
+
+    //arrLS.push(item);
     alert(`Added ${item.name}`);
-    this.setState({ items: arrLS, counter: arrLS.length });
+
     localStorage.setItem("itemById", JSON.stringify(arrLS));
     console.log("add", arrLS);
-    if (this.props.stateOfBasket) this.props.stateOfBasket();
+    //BasketCounter();
   };
+
   render() {
     return (
-      <div
-        className="catalog-list-one__basket text"
-        onClick={this.getProductId}
-      >
-        {BasketIcon}
+      <div className="catalog-list-one__basket text" onClick={this.addToLS}>
+        Add to {BasketIcon}
       </div>
     );
   }
 }
+
+// export class BtnDelete extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       items: [],
+//       counter: 0,
+//     };
+//   }
+
+//   render() {
+//     return <div className="btn-delete"></div>;
+//   }
+// }
 
 export class Basket extends React.Component {
   constructor(props) {
@@ -47,41 +83,37 @@ export class Basket extends React.Component {
     this.state = {
       items: [],
       counter: 0,
-      shouldShowElem: false
+      shouldShowElem: false,
     };
   }
 
   componentDidMount() {
+    console.log("mount", this.state);
     this.setState({
       items: arrLS,
-      counter: arrLS.length
+      counter: arrLS.length,
     });
   }
 
   stateOfBasket = () => {
-    console.log("coming arr", arrLS);
     const items = this.state.items;
     this.setState({
       items: arrLS,
       counter: arrLS.length,
-      shouldShowElem: true
     });
-    if (this.state.shouldShowElem)
-      this.setState({
-        shouldShowElem: false
-      });
-    console.log("state of basket", this.state.items, this.state.counter);
+    console.log("state of basket", this.state.items); //this.state.counter);
   };
 
   openBasket = () => {
     const items = this.state.items;
     this.stateOfBasket();
     this.setState({
-      shouldShowElem: true
+      shouldShowElem: true,
     });
+
     // if (this.state.shouldShowElem)
     //   this.setState({
-    //     shouldShowElem: false
+    //     shouldShowElem: false,
     //   });
   };
 
@@ -94,22 +126,20 @@ export class Basket extends React.Component {
         <div
           className="header-info__basket text flex-center"
           onClick={this.openBasket}
-          // onMouseOut={this.hoverOff}
         >
           {BasketIcon}
+          {/* <BasketCounter /> */}
           <div className="basket-counter flex-center color-white">
             {this.state.counter}
           </div>
+
           {this.state.shouldShowElem && (
-            <BasketMarkup
-              items={this.state.items}
-              stateOfBasket={this.stateOfBasket}
-            />
+            <BasketMarkup items={this.state.items} />
           )}
         </div>
       );
     } else if (this.props.model === "addToCart") {
-      return <BtnAdd id={this.props.id} stateOfBasket={this.stateOfBasket} />;
+      return <BtnAdd id={this.props.id} />;
     } else return true;
   }
 }
@@ -119,65 +149,48 @@ export class BasketMarkup extends React.Component {
     super(props);
     this.state = {
       items: [],
-      counter: 0
+      counter: 0,
     };
   }
 
-  handleRemove = i => {
+  handleRemove = (i) => {
     arrLS.splice(i, 1);
-    this.setState({ items: arrLS, counter: arrLS.length });
+    this.setState({ items: arrLS, counter: arrLS.length }); //counter: arrLS.length });
     localStorage.setItem("itemById", JSON.stringify(arrLS));
     console.log("delete", arrLS);
+    //BasketCounter();
     if (this.props.stateOfBasket) this.props.stateOfBasket();
+
+    // var itemToBeDeleted = this.state.items.indexOf(itemId);
+    // this.state.items.splice(itemToBeDeleted, 1);
+    // this.setState(this.state);
+    // console.log("arrLS after delete", arrLS);
   };
-
-  stateOfMarkup = arrLS => {
-    console.log("coming arr markup", arrLS);
-    const items = this.state.items;
-    this.setState({
-      items: arrLS,
-      counter: arrLS.length
-    });
-    console.log("state of markup", this.state.items, this.state.counter);
-  };
-
-  // countTotalPrice = () => {
-  //   let totalPriceArr = [];
-  //   arrLS.forEach(function(item, i) {
-  //     totalPriceArr.push(item.price);
-  //   });
-  //   console.log("array sum", totalPriceArr);
-
-  //   var result = 0;
-  //   for (var i = 0; i < totalPriceArr.length; i++) {
-  //     result += totalPriceArr[i];
-  //   }
-  //   console.log("summa", result);
-  //   Returnresult();
-  //   var Returnresult = function() {
-  //     return <span>{result}</span>;
-  //   };
-  //   return <Returnresult />;
-  // };
 
   render() {
     const items = this.props.items;
 
     return (
       <div className="mybasket">
-        {Object.keys(items).map(i => {
+        {Object.keys(items).map((i) => {
           return (
             <div key={i} className="mybasket-prod">
               <img src="/img/muffin.png" />
               <div>
-                <p className="text color-white">{items[i].name}</p>
-                <p className="text color-white">${items[i].price}</p>
+                <p className="text color-white">{items[i].item.name}</p>
+                <p className="text color-white">
+                  {/* ${items[i].price} */}
+                  {items[i].quantity} x ${items[i].item.price}
+                </p>
               </div>
               <div className="btn-delete" onClick={this.handleRemove}></div>
             </div>
           );
         })}
         <TotalPrice />
+        <div className="mybasket-show-more text-center">
+          <Link to={"/basket"}>Show All</Link>
+        </div>
       </div>
     );
   }
@@ -186,8 +199,9 @@ export class BasketMarkup extends React.Component {
 class TotalPrice extends React.Component {
   render() {
     let totalPriceArr = [];
-    arrLS.forEach(function(item, i) {
-      totalPriceArr.push(item.price);
+    arrLS.forEach(function (item, i) {
+      let priceOneItem = item.item.price * item.quantity;
+      totalPriceArr.push(priceOneItem);
     });
 
     var result = 0;

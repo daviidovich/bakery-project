@@ -1,6 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { ProductsList, ProductsInsert, ProductsUpdate } from "../pages/pages";
+import {
+  ProductsList,
+  ProductsInsert,
+  ProductsUpdate,
+  OrdersList,
+} from "../pages/pages";
 import "./App.scss";
 
 import NavBar from "../components/Navbar";
@@ -21,6 +26,7 @@ class AdminApp extends React.Component {
               exact
               component={ProductsUpdate}
             />
+            <Route path="/admhome/orders" exact component={OrdersList} />
           </Switch>
         </Router>
       </div>
