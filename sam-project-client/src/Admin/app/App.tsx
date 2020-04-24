@@ -5,29 +5,56 @@ import {
   ProductsInsert,
   ProductsUpdate,
   OrdersList,
+  CompletedOrdersList,
 } from "../pages/pages";
 import "./App.scss";
-
 import NavBar from "../components/Navbar";
+import Header from "../components/Header";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class AdminApp extends React.Component {
   render() {
     return (
-      <div id="AdminApp">
+      <div id="admin-app">
         <Router>
-          <NavBar />
-          <Switch>
-            <Route path="/admhome/list" exact component={ProductsList} />
-            <Route path="/admhome/create" exact component={ProductsInsert} />
-            <Route
-              path="/admhome/update/:id"
-              exact
-              component={ProductsUpdate}
-            />
-            <Route path="/admhome/orders" exact component={OrdersList} />
-          </Switch>
+          <Route path="/admhome">
+            <Header />
+            <div className="admin-app-content">
+              <NavBar />
+              <main>
+                <div className="main-content">
+                  <Switch>
+                    <Route
+                      path="/admhome/list"
+                      exact
+                      component={ProductsList}
+                    />
+                    <Route
+                      path="/admhome/create"
+                      exact
+                      component={ProductsInsert}
+                    />
+                    <Route
+                      path="/admhome/update/:id"
+                      exact
+                      component={ProductsUpdate}
+                    />
+                    <Route
+                      path="/admhome/orders"
+                      exact
+                      component={OrdersList}
+                    />
+                    <Route
+                      path="/admhome/completed"
+                      exact
+                      component={CompletedOrdersList}
+                    />
+                  </Switch>
+                </div>
+              </main>
+            </div>
+          </Route>
         </Router>
       </div>
     );

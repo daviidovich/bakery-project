@@ -16,31 +16,49 @@ import {
   ProductsUpdate,
   OrdersList,
 } from "./Admin/pages/pages";
-import BasketPage from "./Basket/Basket";
 import Header from "./Header/Header";
+import Navbar from "./Navbar/Navbar";
+import Banner from "./Banner/Banner";
+import Features from "./Section Features/Section Features";
+import History from "./Section History/Section History";
+import Catalog from "./Section Catalog copy/Section Catalog";
+import Offers from "./Section Offers/Section Offers";
+import Reviews from "./Section Reviews/Section Client-reviews";
+import Yandex from "./Section Map/Section Map";
 import Footer from "./Footer/Footer";
+import BasketPage from "./Basket/BasketPage";
 
 class App extends React.Component {
   render() {
     return (
       <Router>
         <div className="App">
-          <Header />
-          <div className="content">
-            <Route path="/" exact component={CustomApp} />
-            <Route path="/basket" exact component={BasketPage} />
-            <Route path="/admin" exact component={Authorization} />
-            <Route path="/admhome" exact component={AdminApp}></Route>
-            <Route path="/admhome/list" exact component={ProductsList} />
-            <Route path="/admhome/create" exact component={ProductsInsert} />
-            <Route
-              path="/admhome/update/:id"
-              exact
-              component={ProductsUpdate}
-            />
-            <Route path="/admhome/orders" exact component={OrdersList} />
-          </div>
-          <Footer />
+          <Route exact path="/">
+            <Header />
+            <Navbar />
+            <Banner />
+            <Features />
+            <History />
+            <Catalog />
+            <Offers />
+            <Reviews />
+            <Yandex />
+            <Footer />
+          </Route>
+
+          <Route path="/basket">
+            <Header />
+            <BasketPage />
+            <Footer />
+          </Route>
+
+          <Route path="/admin" exact component={Authorization} />
+
+          <Route path="/admhome" exact component={AdminApp}></Route>
+          <Route path="/admhome/list" exact component={ProductsList} />
+          <Route path="/admhome/create" exact component={ProductsInsert} />
+          <Route path="/admhome/update/:id" exact component={ProductsUpdate} />
+          <Route path="/admhome/orders" exact component={OrdersList} />
         </div>
       </Router>
     );

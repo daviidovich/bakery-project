@@ -16,6 +16,8 @@ export const deleteProductById = (id) => api.delete(`/product/${id}`);
 export const getProductById = (id) => api.get(`/product/${id}`);
 
 export const getOrders = () => api.get(`/orders`);
+export const deleteOrderById = (id) => api.delete(`/order/${id}`);
+export const getOrderById = (id) => api.get(`/order/${id}`);
 
 const apis = {
   //authoForm,
@@ -27,6 +29,8 @@ const apis = {
   getProductById,
   updateProductById,
   getOrders,
+  deleteOrderById,
+  getOrderById,
 };
 
 export default apis;

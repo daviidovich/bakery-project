@@ -2,7 +2,7 @@ import React from "react";
 
 import styled from "styled-components";
 import api from "../API/api";
-import { arrLS } from "../Section Catalog copy/AddToBasket";
+import { arrLS } from "../Section Catalog copy/BtnAdd";
 
 const Title = styled.h2.attrs({
   className: "h2 color-brown",

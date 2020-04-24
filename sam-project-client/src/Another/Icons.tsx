@@ -10,7 +10,11 @@ import {
   faPaperPlane,
   faCaretDown,
   faMinus,
-  faComment
+  faComment,
+  faListUl,
+  faPlus,
+  faCheck,
+  faDollarSign,
 } from "@fortawesome/free-solid-svg-icons";
 
 export const PhoneIcon = (
@@ -22,7 +26,7 @@ export const MapIcon = (
 export const ClockIcon = (
   <FontAwesomeIcon icon={faClock} className="color-beige" />
 );
-export const BasketIcon = <FontAwesomeIcon icon={faShoppingBasket} />;
+export const ShopIcon = <FontAwesomeIcon icon={faShoppingBasket} />;
 export const SearchIcon = (
   <FontAwesomeIcon icon={faSearch} className="color-beige" />
 );
@@ -37,4 +41,12 @@ export const MinusIcon = (
 );
 export const CommentIcon = (
   <FontAwesomeIcon icon={faComment} className="color-beige" />
+);
+export const ListIcon = (
+  <FontAwesomeIcon icon={faListUl} className="color-beige" />
+);
+export const Plus = <FontAwesomeIcon icon={faPlus} className="color-beige" />;
+export const Check = <FontAwesomeIcon icon={faCheck} className="color-beige" />;
+export const Dollar = (
+  <FontAwesomeIcon icon={faDollarSign} className="color-beige" />
 );

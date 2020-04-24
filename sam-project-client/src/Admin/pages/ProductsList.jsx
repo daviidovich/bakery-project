@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import api from "../api/api";
 import { Link } from "react-router-dom";
-
+import "../style/pages.scss";
 import Table from "react-bootstrap/Table";
 import styled from "styled-components";
 
@@ -16,7 +16,7 @@ const Delete = styled.div`
 `;
 
 class UpdateProduct extends Component {
-  updateUser = event => {
+  updateUser = (event) => {
     //event.preventDefault();
     //window.location.href = `/admhome/update/${this.props.id}`;
 
@@ -36,7 +36,7 @@ class UpdateProduct extends Component {
 }
 
 class DeleteProduct extends Component {
-  handleRemove = event => {
+  handleRemove = (event) => {
     event.preventDefault();
     if (window.confirm(`Do tou want to delete the product ${this.props.id}?`)) {
       api.deleteProductById(this.props.id);
@@ -53,61 +53,62 @@ class ProductsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
     };
   }
   componentDidMount = async () => {
-    await api.getAllProducts().then(items => {
+    await api.getAllProducts().then((items) => {
       this.setState({
-        items: items.data.data
+        items: items.data.data,
       });
     });
   };
 
   render() {
     const items = this.state.items;
-    console.log("итемы:", items);
 
     return (
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr className="text-center">
-            <th>№</th>
-            <th>ID</th>
-            <th>Section</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price, $</th>
-            <th>Discount, %</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.keys(items).map(i => {
-            return (
-              <tr key={i}>
-                <td>{i}</td>
-                <td>{items[i]._id}</td>
-                <td>{items[i].section}</td>
-                <td>{items[i].name}</td>
-                <td>{items[i].description}</td>
-                <td>{items[i].price}</td>
-                <td>{items[i].discount}</td>
-                <td>
-                  <DeleteProduct
-                    id={items[i]._id}
-                    updated={this.componentDidMount}
-                  />
-                </td>
-                <td>
-                  <UpdateProduct id={items[i]._id} />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+      <div className="products-list">
+        <Table striped bordered hover size="sm">
+          <thead>
+            <tr className="text-center">
+              <th>№</th>
+              <th>ID</th>
+              <th>Section</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price, $</th>
+              <th>Discount, %</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((item, i) => {
+              return (
+                <tr key={i}>
+                  <td>{i}</td>
+                  <td>{item._id}</td>
+                  <td>{item.section}</td>
+                  <td>{item.name}</td>
+                  <td>{item.description}</td>
+                  <td>{item.price}</td>
+                  <td>{item.discount}</td>
+                  <td>
+                    <DeleteProduct
+                      id={item._id}
+                      updated={this.componentDidMount}
+                    />
+                  </td>
+                  <td>
+                    <UpdateProduct id={item._id} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      </div>
     );
   }
 }

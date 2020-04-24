@@ -1,11 +1,8 @@
 import React from "react";
-import "./Header.css";
 
-import { PhoneIcon, MapIcon, ClockIcon } from "../Another/Icons";
+import { PhoneIcon, MapIcon, ClockIcon } from "../../Another/Icons";
 
-import Lang from "./Lang";
-import Logo from "../Logo/Logo";
-import BasketIcon from "../Section Catalog copy/BasketIcon";
+import Logo from "../../Logo/Logo";
 
 class Header extends React.Component {
   render() {
@@ -22,11 +19,9 @@ class Header extends React.Component {
           </div>
           <Logo />
           <div className="header-info">
-            <Lang />
             <div className="header-info__workTime text">
               {ClockIcon} 08:00 am - 08:30 pm
             </div>
-            <BasketIcon model={"basket"} />
           </div>
         </div>
       </header>

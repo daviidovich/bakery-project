@@ -1,4 +1,5 @@
 import Logo from "./Logo";
 import NavBar from "./Navbar";
+import Header from "./Header";
 
-export { Logo, NavBar };
+export { Logo, Header, NavBar };

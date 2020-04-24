@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "./BasketItem.scss";
 
-export default class BasketItem extends React.Component {
+import "./BasketCart.scss";
+import { arrLS } from "../Section Catalog copy/BasketIcon";
+
+export default class BasketCart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,33 +31,22 @@ export default class BasketItem extends React.Component {
     this.setState({
       quantity: quantity,
     });
-    console.log("item.id", this.props.item.item._id);
     this.props.setItemQuantity(this.props.item.item._id, quantity);
   }
+
+  handleRemove = () => {
+    let id = this.props.item.item._id;
+    let deleteItem = arrLS.find((elem) => elem.item._id === id);
+    let i = arrLS.indexOf(deleteItem);
+    arrLS.splice(i, 1);
+    console.log("arr", arrLS);
+
+    this.props.updateMarkup();
+  };
 
   render() {
     let item = this.props.item;
 
-    // return (
-    //   <tr className="CartItem">
-    //     <td className="name">
-    //       <Link to={"/catalog/" + item._id}>{item.item.name}</Link>
-    //     </td>
-    //     <td className="price">{item.item.price}</td>
-    //     <td className="quantity">
-    //       <div>{this.state.quantity}</div>
-    //       <div className="controls">
-    //         <button className="increase" onClick={this.increase}>
-    //           +
-    //         </button>
-    //         <button className="decrease" onClick={this.decrease}>
-    //           -
-    //         </button>
-    //       </div>
-    //     </td>
-    //     <td className="price-total">{item.item.price * this.state.quantity}</td>
-    //   </tr>
-    // );
     return (
       <div key={item.item._id} className="cart-item">
         <div className="cart-item-image">
@@ -82,6 +72,7 @@ export default class BasketItem extends React.Component {
             </div>
           </div>
         </div>
+        <div className="btn-delete" onClick={this.handleRemove}></div>
       </div>
     );
   }

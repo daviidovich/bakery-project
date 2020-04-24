@@ -18,7 +18,7 @@ import {
   ProductsInsert,
   ProductsUpdate,
 } from "./Admin/pages/pages";
-import BasketPage from "./Basket/Basket";
+import BasketPage from "./Basket/BasketPage";
 
 ReactDOM.render(
   <App />,

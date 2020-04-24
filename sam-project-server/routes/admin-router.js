@@ -12,8 +12,11 @@ router.get("/list", ProductCtrl.getProducts);
 router.post("/product", ProductCtrl.createProduct);
 router.get("/product/:id", ProductCtrl.getProductById);
 router.delete("/product/:id", ProductCtrl.deleteProduct);
+
 router.put("/product/:id", ProductCtrl.updateProduct);
 
 router.get("/orders", AdminCtrl.getOrders);
+router.delete("/order/:id", AdminCtrl.deleteOrder);
+router.get("/order/:id", AdminCtrl.getOrderById);
 
 module.exports = router;

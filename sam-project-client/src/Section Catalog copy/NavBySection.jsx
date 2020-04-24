@@ -22,14 +22,14 @@ export default class NavBySection extends React.Component {
           <li className="navbysection-item text" onClick={this.handleClick}>
             Show All
           </li>
-          {Object.keys(filteredItems).map(i => {
+          {filteredItems.map((item, i) => {
             return (
               <li
                 key={i}
                 className="navbysection-item text"
                 onClick={this.handleClick}
               >
-                {filteredItems[i].section}
+                {item.section}
               </li>
             );
           })}
