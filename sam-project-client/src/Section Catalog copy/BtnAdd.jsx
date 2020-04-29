@@ -25,7 +25,7 @@ export default class BtnAdd extends React.Component {
   render() {
     return (
       <div className="catalog-list-one__basket text" onClick={this.addToBasket}>
-        Add to {ShopIcon}
+        Add {ShopIcon}
       </div>
     );
   }
