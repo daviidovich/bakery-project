@@ -5,6 +5,7 @@ const ProductCtrl = require("../controllers/product-ctrl");
 
 router.get("/", ProductCtrl.getProducts);
 router.get("/:id", ProductCtrl.getProductById);
+router.get("/:flag", ProductCtrl.findProductByFlag);
 router.post("/order", ProductCtrl.makeOrder);
 
 // router.delete("/product/:id", ProductCtrl.deleteProduct);

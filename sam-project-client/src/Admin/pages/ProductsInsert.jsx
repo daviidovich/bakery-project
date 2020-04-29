@@ -67,24 +67,23 @@ class ProductsInsert extends React.Component {
       description: "",
       price: "",
       discount: "",
+      flag: "",
     };
   }
 
   handleChangeInputSection = async (event) => {
-    console.log(event.target.value);
     const section = event.target.value;
     this.setState({ section });
   };
 
   handleChangeInputName = async (event) => {
-    var name =
-      event.target.value[0].toUpperCase() + event.target.value.slice(1);
-    console.log(name);
+    //var name = event.target.value[0].toUpperCase() + event.target.value.slice(1);
+    const name = event.target.value;
     this.setState({ name });
   };
 
   handleChangeInputDesc = async (event) => {
-    //this.value = this.value[0].toUpperCase() + this.value.slice(1);
+    //var desc = this.value[0].toUpperCase() + this.value.slice(1);
     const description = event.target.value;
     this.setState({ description });
   };
@@ -105,9 +104,14 @@ class ProductsInsert extends React.Component {
     this.setState({ discount });
   };
 
+  handleChangeInputFlag = async (event) => {
+    const flag = event.target.value;
+    this.setState({ flag });
+  };
+
   handleIncludeProduct = async () => {
-    const { section, name, description, discount, price } = this.state;
-    const payload = { section, name, description, discount, price };
+    const { section, name, description, discount, price, flag } = this.state;
+    const payload = { section, name, description, discount, price, flag };
 
     await api.insertProduct(payload).then((res) => {
       window.alert(`Product inserted successfully`);
@@ -117,12 +121,13 @@ class ProductsInsert extends React.Component {
         description: "",
         discount: "",
         price: "",
+        flag: "",
       });
     });
   };
 
   render() {
-    const { section, name, description, discount, price } = this.state;
+    const { section, name, description, discount, price, flag } = this.state;
     return (
       <Wrapper>
         <Title>Create Product</Title>
@@ -140,11 +145,6 @@ class ProductsInsert extends React.Component {
           <option value="Cookies">Cookie</option>
           <option value="Donuts">Donut</option>
         </Select>
-        {/* <InputText
-          type="text"
-          value={section}
-          onChange={this.handleChangeInputSection}
-        /> */}
 
         <Label>Name: </Label>
         <InputText
@@ -184,17 +184,14 @@ class ProductsInsert extends React.Component {
           onChange={this.handleChangeInputDiscount}
         />
 
-        {/* <Label>Rating: </Label>
-        <InputText
-          type="number"
-          step="0.1"
-          lang="en-US"
-          min="0"
-          max="10"
-          pattern="[0-9]+([,\.][0-9]+)?"
-          value={rating}
-          onChange={this.handleChangeInputRating}
-        /> */}
+        <Label>Flag: </Label>
+        <Select value={flag} onChange={this.handleChangeInputFlag}>
+          <option value="" hidden>
+            Select the flag
+          </option>
+          <option value="Banner">Banner</option>
+          <option value="Offer of week">Offer of week</option>
+        </Select>
 
         <Button onClick={this.handleIncludeProduct}>Add Product</Button>
         <CancelButton href={"/admhome/list"}>Cancel</CancelButton>

@@ -7,7 +7,8 @@ const Product = new Schema(
     name: String,
     description: String,
     price: Number,
-    discount: Number
+    discount: Number,
+    flag: String,
   },
   { versionKey: false }
 );

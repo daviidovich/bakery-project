@@ -23,7 +23,7 @@ class Header extends React.Component {
           <Logo />
           <div className="header-info">
             <Lang />
-            <div className="header-info__workTime text">
+            <div className="header-info__workTime border-right text">
               {ClockIcon} 08:00 am - 08:30 pm
             </div>
             <BasketIcon model={"basket"} />

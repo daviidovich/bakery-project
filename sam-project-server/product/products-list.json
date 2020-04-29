@@ -4,64 +4,73 @@
       "section": "Cakes",
       "name": "Chocolate cake",
       "description": "Lorem ipsum dolor sit met consectetur adipisicing elit, sed do eiusmod",
+      "price": 17,
       "discount": 20,
-      "price": 17
+      "flag": "Banner"
     },
     {
       "section": "Cakes",
       "name": "Sugarize cake",
       "description": "Lorem ipsum dolor sit met consectetur adipisicing elit, sed do eiusmod",
+      "price": 17,
       "discount": 20,
-      "price": 17
+      "flag": ""
     },
     {
       "section": "Toasts",
       "name": "Sugar toast",
       "description": "Lorem ipsum dolor sit met consectetur adipisicing elit, sed do eiusmod",
-      "discount": 10,
-      "price": 20
+      "price": 17,
+      "discount": 20,
+      "flag": ""
     },
     {
       "section": "Bagels",
       "name": "Sugar bagel",
       "description": "Lorem ipsum dolor sit met consectetur adipisicing elit, sed do eiusmod",
-      "discount": 10,
-      "price": 20
+      "price": 17,
+      "discount": 20,
+      "flag": "Offer of week"
     },
     {
       "section": "Muffins",
       "name": "Sugar muffin",
       "description": "Lorem ipsum dolor sit met consectetur adipisicing elit, sed do eiusmod",
-      "discount": 10,
-      "price": 20
+      "price": 17,
+      "discount": 20,
+      "flag": ""
     },
     {
       "section": "Pastries",
       "name": "Sugar pastrie",
       "description": "Lorem ipsum dolor sit met consectetur adipisicing elit, sed do eiusmod",
-      "discount": 10,
-      "price": 20
+      "price": 17,
+      "discount": 20,
+      "flag": "Offer of week"
     },
     {
       "section": "Cookies",
       "name": "Sugar cookie",
       "description": "Lorem ipsum dolor sit met consectetur adipisicing elit, sed do eiusmod",
-      "discount": 10,
-      "price": 20
+      "price": 17,
+      "discount": 20,
+      "flag": ""
     },
     {
       "section": "Donuts",
       "name": "Sugar donut",
       "description": "Lorem ipsum dolor sit met consectetur adipisicing elit, sed do eiusmod",
-      "discount": 10,
-      "price": 20
+      "price": 17,
+      "discount": 20,
+      "flag": "Offer of week"
     },
     {
       "section": "Chefs",
       "name": "Sugar chef",
       "description": "Lorem ipsum dolor sit met consectetur adipisicing elit, sed do eiusmod",
-      "discount": 10,
-      "price": 20
+      "price": 17,
+      "discount": 20,
+      "flag": "Offer of week"
     }
   ]
 }

@@ -26,11 +26,6 @@ class NavBar extends Component {
               </Link>
             </li>
 
-            <li className="sidebar-item text ">
-              <Link to="/admhome/completed" className="sidebar-link">
-                {Dollar} Completed Orders
-              </Link>
-            </li>
             {/* <li className="sidebar-item text  color-white">
               <Link to="/admhome/update/:id" className="sidebar-link">
                 Update Product

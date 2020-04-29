@@ -100,6 +100,7 @@ updateProduct = async (req, res) => {
     product.description = body.description;
     product.price = body.price;
     product.discount = body.discount;
+    product.flag = body.flag;
 
     product
       .save()
@@ -117,6 +118,22 @@ updateProduct = async (req, res) => {
         });
       });
   });
+};
+
+findProductByFlag = async (req, res) => {
+  await Product.find({ flag: req.params.flag }, (err, product) => {
+    if (err) {
+      return res.status(400).json({ success: false, error: err });
+    }
+
+    if (!Product) {
+      return res
+        .status(404)
+        .json({ success: false, error: `Product not found` });
+    }
+
+    return res.status(200).json({ success: true, data: product });
+  }).catch((err) => console.log(err));
 };
 
 makeOrder = async (req, res) => {
@@ -157,5 +174,6 @@ module.exports = {
   getProductById,
   deleteProduct,
   updateProduct,
+  findProductByFlag,
   makeOrder,
 };

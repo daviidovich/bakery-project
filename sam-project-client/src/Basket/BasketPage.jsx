@@ -10,6 +10,7 @@ export default class BasketPage extends React.Component {
     super(props);
     this.state = {
       items: [],
+      date: "",
       name: "",
       address: "",
       phone: "",
@@ -82,10 +83,28 @@ export default class BasketPage extends React.Component {
     let timer = setTimeout(() => this.creatingOrder(), 1000);
   };
 
+  setDate = () => {
+    let date = new Date();
+    var options = {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+
+      hour: "numeric",
+      minute: "numeric",
+    };
+
+    this.setState({
+      date: date.toLocaleString("ru", options),
+    });
+  };
+
   creatingOrder = () => {
+    this.setDate();
     console.log("order", this.state);
     const {
       items,
+      date,
       name,
       address,
       phone,
@@ -93,7 +112,16 @@ export default class BasketPage extends React.Component {
       payment,
       totalPrice,
     } = this.state;
-    const payload = { items, name, address, phone, info, payment, totalPrice };
+    const payload = {
+      items,
+      date,
+      name,
+      address,
+      phone,
+      info,
+      payment,
+      totalPrice,
+    };
 
     api.makeOrder(payload).then((res) => {
       window.alert(`Order fixed`);
@@ -102,9 +130,9 @@ export default class BasketPage extends React.Component {
       //   userData: userData,
       //   totalPrice: totalPrice,
       // });
+      localStorage.clear();
+      this.updateMarkup();
     });
-    localStorage.clear();
-    this.updateMarkup();
   };
 
   render() {

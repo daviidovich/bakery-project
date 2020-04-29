@@ -5,7 +5,6 @@ import {
   ProductsInsert,
   ProductsUpdate,
   OrdersList,
-  CompletedOrdersList,
 } from "../pages/pages";
 import "./App.scss";
 import NavBar from "../components/Navbar";
@@ -44,11 +43,6 @@ class AdminApp extends React.Component {
                       path="/admhome/orders"
                       exact
                       component={OrdersList}
-                    />
-                    <Route
-                      path="/admhome/completed"
-                      exact
-                      component={CompletedOrdersList}
                     />
                   </Switch>
                 </div>

@@ -17,17 +17,17 @@ const Delete = styled.div`
 
 class UpdateProduct extends Component {
   updateUser = (event) => {
-    //event.preventDefault();
-    //window.location.href = `/admhome/update/${this.props.id}`;
+    event.preventDefault();
+    window.location.href = `/admhome/update/${this.props.id}`;
 
-    if (window.confirm(`Do tou want to update the product ${this.props.id}?`)) {
-      return (
-        <Link
-          to={`/admhome/update/${this.props.id}`}
-          className="nav-link"
-        ></Link>
-      );
-    }
+    // if (window.confirm(`Do tou want to update the product ${this.props.id}?`)) {
+    //   return (
+    //     <Link
+    //       to={`/admhome/update/${this.props.id}`}
+    //       className="nav-link"
+    //     ></Link>
+    //   );
+    // }
   };
 
   render() {
@@ -79,6 +79,7 @@ class ProductsList extends Component {
               <th>Description</th>
               <th>Price, $</th>
               <th>Discount, %</th>
+              <th>Flag</th>
               <th></th>
               <th></th>
             </tr>
@@ -94,6 +95,7 @@ class ProductsList extends Component {
                   <td>{item.description}</td>
                   <td>{item.price}</td>
                   <td>{item.discount}</td>
+                  <td>{item.flag}</td>
                   <td>
                     <DeleteProduct
                       id={item._id}
