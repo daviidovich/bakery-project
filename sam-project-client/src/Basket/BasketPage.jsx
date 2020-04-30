@@ -2,7 +2,7 @@ import React from "react";
 import BasketCart from "./BasketCart";
 import UserDataForm from "./UserDataForm";
 import "./BasketPage.scss";
-import { arrLS } from "../Section Catalog copy/BasketIcon";
+import { arrLS } from "../Section Catalog/BasketIcon";
 import api from "../API/api";
 
 export default class BasketPage extends React.Component {
@@ -71,7 +71,6 @@ export default class BasketPage extends React.Component {
   };
 
   setUserData = (data) => {
-    //const userData = data;
     this.setState({
       name: data.name,
       address: data.address,
@@ -79,7 +78,7 @@ export default class BasketPage extends React.Component {
       info: data.info,
       payment: data.payment,
     });
-    //this.setState({ userData: data });
+
     let timer = setTimeout(() => this.creatingOrder(), 1000);
   };
 
@@ -141,7 +140,7 @@ export default class BasketPage extends React.Component {
     return (
       <div className="cart-page">
         <h1 className="color-brown">My Basket</h1>
-        {this.state.items !== 0 && (
+        {arrLS !== 0 && (
           <div className="cart-page-content">
             <div className="cart-page-userdata cart-item">
               <UserDataForm userData={this.setUserData} />
@@ -159,94 +158,96 @@ export default class BasketPage extends React.Component {
                   );
                 })}
               </div>
-              <h4 className="color-brown">
+              <h3 className="color-brown">
                 Total price: ${this.state.totalPrice}
-              </h4>
+              </h3>
             </div>
           </div>
         )}
-        {this.state.items === 0 && (
-          <h3 className="color-brown text-center">Your basket is empty!</h3>
+        {arrLS === 0 && (
+          <div className="cart-page-content">
+            <h3 className="color-brown text-center">Your basket is empty!</h3>
+          </div>
         )}
         {this.props.children}
-        <div>
+        {/* <div>
           <Test />
-        </div>
+        </div> */}
       </div>
     );
   }
 }
 
-var testarr = JSON.parse(localStorage.getItem("test")) || [];
+// var testarr = JSON.parse(localStorage.getItem("test")) || [];
 
-export class Test extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      arr: [],
-    };
-  }
+// export class Test extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       arr: [],
+//     };
+//   }
 
-  componentDidMount() {
-    this.setState({ arr: testarr });
-  }
+//   componentDidMount() {
+//     this.setState({ arr: testarr });
+//   }
 
-  update = (newarr) => {
-    this.setState({ arr: newarr });
-  };
+//   update = (newarr) => {
+//     this.setState({ arr: newarr });
+//   };
 
-  render() {
-    return (
-      <div style={({ height: "100px" }, { border: "2px solid red" })}>
-        <h1>BasketIcon: {this.state.arr}</h1>
-        <Test1 arr={this.state.arr} />
-        <Test2 update={this.update} />
-      </div>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <div style={({ height: "100px" }, { border: "2px solid red" })}>
+//         <h1>BasketIcon: {this.state.arr}</h1>
+//         <Test1 arr={this.state.arr} />
+//         <Test2 update={this.update} />
+//       </div>
+//     );
+//   }
+// }
 
-export class Test1 extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      arr: [],
-    };
-  }
-  render() {
-    const arr = this.props.arr;
-    return (
-      <div style={({ heigth: "50px" }, { border: "2px solid blue" })}>
-        <h1>Markup: {arr}</h1>
-      </div>
-    );
-  }
-}
+// export class Test1 extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       arr: [],
+//     };
+//   }
+//   render() {
+//     const arr = this.props.arr;
+//     return (
+//       <div style={({ heigth: "50px" }, { border: "2px solid blue" })}>
+//         <h1>Markup: {arr}</h1>
+//       </div>
+//     );
+//   }
+// }
 
-export class Test2 extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      arr: [],
-    };
-  }
+// export class Test2 extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       arr: [],
+//     };
+//   }
 
-  click = () => {
-    testarr.push(4, 4, 4);
-    localStorage.setItem("test", JSON.stringify(testarr));
-    this.setState({ arr: testarr });
-    this.props.update(testarr);
-  };
+//   click = () => {
+//     testarr.push(4, 4, 4);
+//     localStorage.setItem("test", JSON.stringify(testarr));
+//     this.setState({ arr: testarr });
+//     this.props.update(testarr);
+//   };
 
-  render() {
-    const arr = this.props.arr;
-    return (
-      <div
-        style={({ height: "50px" }, { border: "2px solid green" })}
-        onClick={this.click}
-      >
-        <h1>BtnAdd: {this.state.arr}</h1>
-      </div>
-    );
-  }
-}
+//   render() {
+//     const arr = this.props.arr;
+//     return (
+//       <div
+//         style={({ height: "50px" }, { border: "2px solid green" })}
+//         onClick={this.click}
+//       >
+//         <h1>BtnAdd: {this.state.arr}</h1>
+//       </div>
+//     );
+//   }
+// }

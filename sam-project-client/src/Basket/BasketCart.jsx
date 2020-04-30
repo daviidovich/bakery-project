@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./BasketCart.scss";
-import { arrLS } from "../Section Catalog copy/BasketIcon";
+import { arrLS } from "../Section Catalog/BasketIcon";
 
 export default class BasketCart extends React.Component {
   constructor(props) {
