@@ -19,26 +19,46 @@ class Footer extends React.Component {
             <h3 className="footer-title color-brown">Information</h3>
             <div className="footer__col-2-links flex-space-between">
               <div>
-                <a href="">About us</a>
+                <a href="" className="text">
+                  About us
+                </a>
                 <br />
-                <a href="">Check out</a>
+                <a href="" className="text">
+                  Check out
+                </a>
                 <br />
-                <a href="">Contact</a>
+                <a href="" className="text">
+                  Contact
+                </a>
                 <br />
-                <a href="">Service</a>
+                <a href="" className="text">
+                  Service
+                </a>
                 <br />
-                <a href="">Check out</a>
+                <a href="" className="text">
+                  Check out
+                </a>
               </div>
               <div>
-                <a href="">My account</a>
+                <a href="" className="text">
+                  My account
+                </a>
                 <br />
-                <a href="">Contact</a>
+                <a href="" className="text">
+                  Contact
+                </a>
                 <br />
-                <a href="">Shopping cart</a>
+                <a href="" className="text">
+                  Shopping cart
+                </a>
                 <br />
-                <a href="">Shop</a>
+                <a href="" className="text">
+                  Shop
+                </a>
                 <br />
-                <a href="">Contact</a>
+                <a href="" className="text">
+                  Contact
+                </a>
               </div>
             </div>
           </div>

@@ -1,8 +1,6 @@
 import React from "react";
 import "./Button.css";
-
 import cx from "classnames";
-import { css } from "styled-components";
 
 class Button extends React.Component<{
   label: any;
@@ -13,7 +11,7 @@ class Button extends React.Component<{
     return (
       <div
         className={cx("button flex-center", {
-          "button-brown-back": this.props.isActive
+          "button-brown-back": this.props.isActive,
         })}
         onClick={this.props.onClick}
       >

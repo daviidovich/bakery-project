@@ -1,12 +1,11 @@
 import React from "react";
 import "./Section Map.css";
-import { YMaps, Map, GeoObject, Placemark } from "react-yandex-maps";
-import { PhoneIcon, MapIcon } from "../Another/Icons";
+import { YMaps, Map, Placemark } from "react-yandex-maps";
 
 const mapData = {
   center: [-35.751574, 137.573856],
   zoom: 6,
-  controls: []
+  controls: [],
 };
 
 const MyPlacemark = () => (
@@ -15,19 +14,19 @@ const MyPlacemark = () => (
       <Placemark
         geometry={{
           type: "Point",
-          coordinates: [-34.9517, 138.5938]
+          coordinates: [-34.9517, 138.5938],
         }}
       />
       <Placemark
         geometry={{
           type: "Point",
-          coordinates: [-37.8137, 144.963]
+          coordinates: [-37.8137, 144.963],
         }}
       />
       <Placemark
         geometry={{
           type: "Point",
-          coordinates: [-35.3069, 149.1255]
+          coordinates: [-35.3069, 149.1255],
         }}
       />
     </Map>

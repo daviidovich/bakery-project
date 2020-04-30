@@ -1,5 +1,4 @@
 import React from "react";
-import { getNewPrice } from "../Another/CountPrice";
 
 interface myProps {
   newPrice: number;
@@ -7,9 +6,6 @@ interface myProps {
 }
 
 export default class OfferCard extends React.Component<myProps> {
-  constructor(props: any) {
-    super(props);
-  }
   // generateRandom = () => {
   //   let items = this.state.items;
   //   var randomItems: any = [];

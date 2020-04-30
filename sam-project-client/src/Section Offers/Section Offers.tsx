@@ -33,7 +33,6 @@ export default class Offers extends React.Component<{}, mySt> {
         offers.push(item);
       }
     });
-    console.log("offers", offers);
     this.setState({
       offers: offers,
     });

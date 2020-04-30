@@ -25,7 +25,6 @@ class Banner extends React.Component {
 
   render() {
     const bannerItem = this.state.bannerItem;
-    console.log("banner", bannerItem);
 
     let newPrice = getNewPrice(bannerItem.price, bannerItem.discount);
     return (

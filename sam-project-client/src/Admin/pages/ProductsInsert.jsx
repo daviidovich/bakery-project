@@ -191,6 +191,7 @@ class ProductsInsert extends React.Component {
           </option>
           <option value="Banner">Banner</option>
           <option value="Offer of week">Offer of week</option>
+          <option value="">-</option>
         </Select>
 
         <Button onClick={this.handleIncludeProduct}>Add Product</Button>

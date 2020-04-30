@@ -50,8 +50,13 @@
 }
 
 .App {
-  margin: 0px auto;
   background-color: #fffbf0;
+}
+
+h1 {
+  font-size: 55px;
+  font-weight: 600;
+  letter-spacing: -2px;
 }
 
 h2 {
@@ -63,11 +68,13 @@ h2 {
 
 h3 {
   font-size: 30px;
+  font-weight: 600;
   letter-spacing: -1px;
   margin: 0;
 }
 
 h4 {
   font-size: 20px;
+  font-weight: 600;
   letter-spacing: -1px;
 }

@@ -10,8 +10,6 @@ import "./App.scss";
 import NavBar from "../components/Navbar";
 import Header from "../components/Header";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-
 class AdminApp extends React.Component {
   render() {
     return (
@@ -24,6 +22,11 @@ class AdminApp extends React.Component {
               <main>
                 <div className="main-content">
                   <Switch>
+                    <Route exact path="/admhome">
+                      <h2 className="color-brown text-center">
+                        Welcome, administrator!
+                      </h2>
+                    </Route>
                     <Route
                       path="/admhome/list"
                       exact

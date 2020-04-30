@@ -1,12 +1,10 @@
 import React from "react";
-
 import styled from "styled-components";
-import api from "../API/api";
-import { arrLS } from "../Section Catalog copy/BtnAdd";
 
 const Title = styled.h2.attrs({
-  className: "h2 color-brown",
+  className: "color-brown",
 })`
+  font-size: 40px;
   margin-bottom: 1.5rem;
 `;
 
@@ -23,7 +21,7 @@ const Label = styled.label.attrs({
 `;
 
 const Select = styled.select.attrs({
-  className: "form-control",
+  className: "form-control text",
 })`
   margin: 5px;
   width: 400px;
@@ -37,13 +35,7 @@ const InputText = styled.input.attrs({
 `;
 
 const Button = styled.button.attrs({
-  className: `btn btn-primary`,
-})`
-  margin: 15px 15px 15px 5px;
-`;
-
-const CancelButton = styled.a.attrs({
-  className: `btn btn-danger`,
+  className: `btn btn-primary text color-white`,
 })`
   margin: 15px 15px 15px 5px;
 `;
@@ -83,8 +75,6 @@ export default class UserDataForm extends React.Component {
 
   handleSendOrder = async (e) => {
     e.preventDefault();
-
-    const { name, address, phone, info, payment } = this.state;
     this.setState({
       name: "",
       address: "",
@@ -92,8 +82,6 @@ export default class UserDataForm extends React.Component {
       info: "",
       payment: "",
     });
-
-    console.log(this.state);
     if (this.state) this.props.userData(this.state);
   };
 

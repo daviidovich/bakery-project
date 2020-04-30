@@ -19,7 +19,7 @@ export default class Features extends React.Component<{}, mySt> {
       items: [],
     };
   }
-  componentWillMount = async () => {
+  componentDidMount = async () => {
     await api.getAllProducts().then((items: any) => {
       this.setState({
         items: items.data.data,

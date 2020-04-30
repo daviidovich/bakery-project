@@ -1,48 +1,48 @@
-import React, { Component } from "react";
+import React from "react";
 import api from "../api/api";
 
 import styled from "styled-components";
 
 const Title = styled.h1.attrs({
-  className: "h1 color-brown"
+  className: "h1 color-brown",
 })`
   margin-bottom: 1.5rem;
 `;
 
 const Wrapper = styled.form.attrs({
-  className: "form-group"
+  className: "form-group",
 })`
   margin: 30px 100px;
 `;
 
 const Label = styled.label.attrs({
-  className: "text"
+  className: "text",
 })`
   margin: 5px;
 `;
 
 const Select = styled.select.attrs({
-  className: "form-control"
+  className: "form-control",
 })`
   margin: 5px;
   width: 400px;
 `;
 
 const InputText = styled.input.attrs({
-  className: "form-control"
+  className: "form-control",
 })`
   margin: 5px;
   width: 400px;
 `;
 
 const Button = styled.button.attrs({
-  className: `btn btn-primary`
+  className: `btn btn-primary`,
 })`
   margin: 15px 15px 15px 5px;
 `;
 
 const CancelButton = styled.a.attrs({
-  className: `btn btn-danger`
+  className: `btn btn-danger`,
 })`
   margin: 15px 15px 15px 5px;
 `;
@@ -56,30 +56,31 @@ class ProductsUpdate extends React.Component {
       name: "",
       description: "",
       price: "",
-      discount: ""
+      discount: "",
+      flag: "",
     };
   }
 
-  handleChangeInputSection = async event => {
+  handleChangeInputSection = async (event) => {
     console.log(event.target.value);
     const section = event.target.value;
     this.setState({ section });
   };
 
-  handleChangeInputName = async event => {
+  handleChangeInputName = async (event) => {
     var name =
       event.target.value[0].toUpperCase() + event.target.value.slice(1);
     console.log(name);
     this.setState({ name });
   };
 
-  handleChangeInputDesc = async event => {
+  handleChangeInputDesc = async (event) => {
     //this.value = this.value[0].toUpperCase() + this.value.slice(1);
     const description = event.target.value;
     this.setState({ description });
   };
 
-  handleChangeInputPrice = async event => {
+  handleChangeInputPrice = async (event) => {
     const price = event.target.validity.valid
       ? event.target.value
       : this.state.price;
@@ -87,7 +88,7 @@ class ProductsUpdate extends React.Component {
     this.setState({ price });
   };
 
-  handleChangeInputDiscount = async event => {
+  handleChangeInputDiscount = async (event) => {
     const discount = event.target.validity.valid
       ? event.target.value
       : this.state.discount;
@@ -95,18 +96,32 @@ class ProductsUpdate extends React.Component {
     this.setState({ discount });
   };
 
-  handleUpdateProduct = async () => {
-    const { id, section, name, description, discount, price } = this.state;
-    const payload = { section, name, description, discount, price };
+  handleChangeInputFlag = async (event) => {
+    const flag = event.target.value;
+    this.setState({ flag });
+  };
 
-    await api.updateProductById(id, payload).then(res => {
+  handleUpdateProduct = async () => {
+    const {
+      id,
+      section,
+      name,
+      description,
+      discount,
+      price,
+      flag,
+    } = this.state;
+    const payload = { section, name, description, discount, price, flag };
+
+    await api.updateProductById(id, payload).then((res) => {
       window.alert(`Product updated successfully`);
       this.setState({
         section: "",
         name: "",
         description: "",
         price: "",
-        discount: ""
+        discount: "",
+        flag: "",
       });
     });
   };
@@ -120,15 +135,16 @@ class ProductsUpdate extends React.Component {
       name: product.data.data.name,
       description: product.data.data.description,
       price: product.data.data.price,
-      discount: product.data.data.discount
+      discount: product.data.data.discount,
+      flag: product.data.data.flag,
     });
   };
 
   render() {
-    const { section, name, description, discount, price } = this.state;
+    const { section, name, description, discount, price, flag } = this.state;
     return (
       <Wrapper>
-        <Title>Create Product</Title>
+        <Title>Update Product</Title>
         <Label>Section: </Label>
         <Select value={section} onChange={this.handleChangeInputSection}>
           <option value="" hidden>
@@ -143,11 +159,6 @@ class ProductsUpdate extends React.Component {
           <option value="Cookies">Cookie</option>
           <option value="Donuts">Donut</option>
         </Select>
-        {/* <InputText
-          type="text"
-          value={section}
-          onChange={this.handleChangeInputSection}
-        /> */}
 
         <Label>Name: </Label>
         <InputText
@@ -187,17 +198,15 @@ class ProductsUpdate extends React.Component {
           onChange={this.handleChangeInputDiscount}
         />
 
-        {/* <Label>Rating: </Label>
-        <InputText
-          type="number"
-          step="0.1"
-          lang="en-US"
-          min="0"
-          max="10"
-          pattern="[0-9]+([,\.][0-9]+)?"
-          value={rating}
-          onChange={this.handleChangeInputRating}
-        /> */}
+        <Label>Flag: </Label>
+        <Select value={flag} onChange={this.handleChangeInputFlag}>
+          <option value="" hidden>
+            Select the flag
+          </option>
+          <option value="Banner">Banner</option>
+          <option value="Offer of week">Offer of week</option>
+          <option value="">-</option>
+        </Select>
 
         <Button onClick={this.handleUpdateProduct}>Update Product</Button>
         <CancelButton href={"/admhome/list"}>Cancel</CancelButton>

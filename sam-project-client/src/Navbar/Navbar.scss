@@ -2,28 +2,30 @@
   border-bottom: 2px solid #eaeae8;
 }
 
-.nav-content {
-  margin: 0 215px;
-}
-
 .nav-items {
   list-style-type: none;
-  line-height: 70px;
   margin: 0;
+  padding: 0;
 }
 
 .nav-item {
   margin: 0px 10px;
-  padding: 0 15px;
   cursor: pointer;
-  text-align: center;
   &:hover {
-    background-color: #ffe6dd;
+    //background-color: #ffece7;
     color: #e0a45e;
   }
 }
 
+.nav-link {
+  display: inline-block;
+  padding: 0 10px;
+  height: 70px;
+  line-height: 70px;
+}
+
 .nav-link-active {
   color: #e0a45e;
+  line-height: 74px;
   border-bottom: 4px dotted #e0a45e;
 }
