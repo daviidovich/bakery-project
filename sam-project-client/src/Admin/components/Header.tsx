@@ -4,7 +4,7 @@ import { PhoneIcon, MapIcon, ClockIcon } from "../../Another/Icons";
 
 import Logo from "../../Logo/Logo";
 
-class Header extends React.Component {
+class HeaderAdmin extends React.Component {
   render() {
     return (
       <header className="header" id="header">
@@ -29,4 +29,4 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+export default HeaderAdmin;

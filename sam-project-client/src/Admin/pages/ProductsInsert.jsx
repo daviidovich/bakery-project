@@ -109,12 +109,12 @@ class ProductsInsert extends React.Component {
     this.setState({ flag });
   };
 
-  handleIncludeProduct = async () => {
+  handleIncludeProduct = async (event) => {
+    event.preventDefault();
     const { section, name, description, discount, price, flag } = this.state;
     const payload = { section, name, description, discount, price, flag };
 
     await api.insertProduct(payload).then((res) => {
-      window.alert(`Product inserted successfully`);
       this.setState({
         section: "",
         name: "",
@@ -124,6 +124,8 @@ class ProductsInsert extends React.Component {
         flag: "",
       });
     });
+    window.alert(`${name} inserted successfully`);
+    window.location.href = `/admhome/list`;
   };
 
   render() {
@@ -195,7 +197,6 @@ class ProductsInsert extends React.Component {
         </Select>
 
         <Button onClick={this.handleIncludeProduct}>Add Product</Button>
-        <CancelButton href={"/admhome/list"}>Cancel</CancelButton>
       </Wrapper>
     );
   }

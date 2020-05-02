@@ -30,8 +30,7 @@ class DeleteProduct extends Component {
     event.preventDefault();
     if (window.confirm(`Do tou want to delete the product ${this.props.id}?`)) {
       api.deleteProductById(this.props.id);
-      //window.location.reload();
-      if (this.props.updated) this.props.updated();
+      window.location.reload();
     }
   };
   render() {
@@ -53,6 +52,7 @@ class ProductsList extends Component {
       });
     });
   };
+
 
   render() {
     const items = this.state.items;

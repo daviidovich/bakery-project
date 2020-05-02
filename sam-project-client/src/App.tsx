@@ -1,21 +1,23 @@
 import React from "react";
 import "./App.scss";
-
 import {
   BrowserRouter as Router,
   Route,
-  // Switch,
+  Switch,
   // Redirect,
 } from "react-router-dom";
 
 import Authorization from "./Admin/components/authorization";
-import AdminApp from "./Admin/app/App";
-// import {
-//   ProductsList,
-//   ProductsInsert,
-//   ProductsUpdate,
-//   OrdersList,
-// } from "./Admin/pages/pages";
+import {
+  ProductsList,
+  ProductsInsert,
+  ProductsUpdate,
+  OrdersList,
+} from "./Admin/pages/pages";
+import "./Admin/app/AdminApp.scss"
+import NavBar from "./Admin/components/Navbar";
+import HeaderAdmin from "./Admin/components/Header";
+
 import Header from "./Header/Header";
 import Navbar from "./Navbar/Navbar";
 import Banner from "./Banner/Banner";
@@ -71,15 +73,44 @@ class App extends React.Component<{}, myState> {
 
           <Route path="/admin" exact component={Authorization} />
 
-          <Route path="/admhome" exact component={AdminApp}></Route>
-          {/* <Route path="/admhome/list" exact component={ProductsList} />
-            <Route path="/admhome/create" exact component={ProductsInsert} />
-            <Route
-              path="/admhome/update/:id"
-              exact
-              component={ProductsUpdate}
-            />
-            <Route path="/admhome/orders" exact component={OrdersList} /> */}
+          <Route path="/admhome">
+          <HeaderAdmin />
+            <div className="admin-app-content">
+              <NavBar />
+              <main>
+                <div className="main-content">
+                  <Switch>
+                    <Route exact path="/admhome">
+                      <h2 className="color-brown text-center">
+                        Welcome, administrator!
+                      </h2>
+                    </Route>
+                    <Route
+                      path="/admhome/list"
+                      exact
+                      component={ProductsList}
+                    />
+                    <Route
+                      path="/admhome/create"
+                      exact
+                      component={ProductsInsert}
+                    />
+                    <Route
+                      path="/admhome/update/:id"
+                      exact
+                      component={ProductsUpdate}
+                    />
+                    <Route
+                      path="/admhome/orders"
+                      exact
+                      component={OrdersList}
+                    />
+                  </Switch>
+                </div>
+              </main>
+            </div>
+          </Route>
+
         </div>
       </Router>
     );

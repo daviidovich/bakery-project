@@ -1,13 +1,13 @@
 {
   "products": [
-    {
-      "section": "Cakes",
-      "name": "Chocolate cake",
-      "description": "Lorem ipsum dolor sit met consectetur adipisicing elit, sed do eiusmod",
-      "price": 17,
-      "discount": 20,
-      "flag": "Banner"
-    },
+      {
+        "section":"Cakes",
+        "name":"Chocolate cake",
+        "description":"Lorem ipsum dolor sit met consectetur adipisicing elit, sed do eiusmod",
+        "price": 17,
+        "discount": 10,
+        "flag":"Offer of week"
+      },
     {
       "section": "Cakes",
       "name": "Sugarize cake",

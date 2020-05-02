@@ -13,7 +13,6 @@ import Header from "../components/Header";
 class AdminApp extends React.Component {
   render() {
     return (
-      <div id="admin-app">
         <Router>
           <Route path="/admhome">
             <Header />
@@ -53,7 +52,6 @@ class AdminApp extends React.Component {
             </div>
           </Route>
         </Router>
-      </div>
     );
   }
 }

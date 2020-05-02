@@ -101,7 +101,8 @@ class ProductsUpdate extends React.Component {
     this.setState({ flag });
   };
 
-  handleUpdateProduct = async () => {
+  handleUpdateProduct = async (e) => {
+    e.preventDefault();
     const {
       id,
       section,
@@ -114,7 +115,6 @@ class ProductsUpdate extends React.Component {
     const payload = { section, name, description, discount, price, flag };
 
     await api.updateProductById(id, payload).then((res) => {
-      window.alert(`Product updated successfully`);
       this.setState({
         section: "",
         name: "",
@@ -124,6 +124,8 @@ class ProductsUpdate extends React.Component {
         flag: "",
       });
     });
+    window.alert(`${name} updated successfully`);
+    window.location.href = `/admhome/list`;
   };
 
   componentDidMount = async () => {
@@ -209,7 +211,6 @@ class ProductsUpdate extends React.Component {
         </Select>
 
         <Button onClick={this.handleUpdateProduct}>Update Product</Button>
-        <CancelButton href={"/admhome/list"}>Cancel</CancelButton>
       </Wrapper>
     );
   }
