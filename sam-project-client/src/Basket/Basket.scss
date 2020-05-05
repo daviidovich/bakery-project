@@ -67,9 +67,12 @@
 .mybasket-show-more {
   padding: 10px 10px;
   background-color: #e0a45e;
+  border-radius: 0 0 5px 5px;
   & a {
     color: white;
     text-decoration: none;
-    border-radius: 0 0 5px 5px;
+  }
+  &:hover{
+    font-size: 21px;
   }
 }

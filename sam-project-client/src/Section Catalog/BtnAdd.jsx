@@ -1,7 +1,7 @@
 import React from "react";
 import { ShopIcon } from "../Another/Icons";
-import "./Basket.scss";
-import { arrLS } from "./BasketIcon";
+import "../Basket/Basket.scss";
+import { arrLS } from "../Basket/BasketIcon";
 
 export default class BtnAdd extends React.Component {
   addToBasket = () => {
@@ -20,6 +20,7 @@ export default class BtnAdd extends React.Component {
     alert(`Added ${item.name}`);
     localStorage.setItem("itemById", JSON.stringify(arrLS));
     this.props.stateRise(arrLS);
+    console.log("set stateRise at BtnAdd", arrLS)
   };
 
   render() {

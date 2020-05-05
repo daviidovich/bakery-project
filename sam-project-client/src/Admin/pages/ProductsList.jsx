@@ -14,6 +14,27 @@ const Delete = styled.div`
   cursor: pointer;
 `;
 
+const Wrapper = styled.div`
+  display:flex;
+  margin-bottom: 20px;
+`;
+
+const Select = styled.select.attrs({
+  className: "form-control",
+})`
+  background-color: #dfa45c;
+  color: white;
+  width: 120px;
+  border-radius: 0 5px 5px 0;
+`;
+
+const InputText = styled.input.attrs({
+  className: "form-control",
+})`
+  width: 300px;
+  border-radius: 5px 0px 0px 5px;
+`;
+
 class UpdateProduct extends Component {
   updateUser = (event) => {
     event.preventDefault();
@@ -43,22 +64,61 @@ class ProductsList extends Component {
     super(props);
     this.state = {
       items: [],
+      searchResult: []
     };
   }
   componentDidMount = async () => {
     await api.getAllProducts().then((items) => {
       this.setState({
         items: items.data.data,
+        searchResult: items.data.data
       });
     });
   };
 
+  handleSearch = (e) => {
+    let searchQuery = e.target.value.toLowerCase(); // this указывает на текущий объект - search
+    const items = this.state.items;
+    let searchResult = this.state.searchResult;
+    
+    searchResult = items.filter(function(item){
+        var userString = item.id + ' ' + item.name + ' ' + item.section;   
+        userString = userString.toLowerCase() ;  
+        if(userString.indexOf(searchQuery) !== -1) return true;
+    })
+    this.setState({searchResult: searchResult})
+  }
+
+  handleSortBy = (e) => {
+    const searchResult = this.state.searchResult;
+    var currentOption = e.target.value;
+ 
+    function sortObjects(a,b){
+      if(a[currentOption] > b[currentOption]) return 1;
+      else return -1;
+    }
+    searchResult.sort(sortObjects);
+    this.setState({searchResult: searchResult})
+  }
+
 
   render() {
-    const items = this.state.items;
+    const searchResult = this.state.searchResult;
 
     return (
       <div className="products-list">
+        <Wrapper>
+          <InputText type="text" placeholder="Search" onChange={this.handleSearch}/>
+          <Select onChange={this.handleSortBy} >
+            <option value="" hidden>
+              Sort by:
+            </option>
+            <option value="name">Name</option>
+            <option value="section">Section</option>
+            <option value="price">Price ↑</option>
+          </Select>
+        </Wrapper>
+        
         <Table striped bordered hover size="sm">
           <thead>
             <tr className="text-center">
@@ -75,7 +135,7 @@ class ProductsList extends Component {
             </tr>
           </thead>
           <tbody>
-            {items.map((item, i) => {
+            {searchResult.map((item, i) => {
               return (
                 <tr key={i}>
                   <td>{i}</td>

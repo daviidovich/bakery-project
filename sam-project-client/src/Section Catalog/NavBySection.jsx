@@ -9,7 +9,6 @@ export default class NavBySection extends React.Component {
 
   handleClick(event) {
     const value = event.target.innerHTML;
-    console.log("handleclick:", value); //here you will get the value of the li element
     if (this.props.getNavValue) this.props.getNavValue(value);
   }
   render() {

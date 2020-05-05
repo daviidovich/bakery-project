@@ -3,7 +3,7 @@ import "./Section Catalog.scss";
 import api from "../API/api";
 import Headline from "../Another/Sections headline";
 import NavBySection from "./NavBySection";
-import CatalogCart from "./CatalogCart";
+import CatalogList from "./CatalogCart";
 
 // interface mySt {
 //   items: any;
@@ -53,12 +53,10 @@ export default class Catalog extends React.Component {
             items={this.state.items}
             getNavValue={this.filterCatalogSections}
           />
-          <div className="catalog-list">
-            <CatalogCart
+            <CatalogList
               items={this.state.itemsToShow}
               stateRise={this.props.stateRise}
             />
-          </div>
         </div>
       </div>
     );

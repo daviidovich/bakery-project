@@ -13,6 +13,9 @@
   & p {
     margin: 5px;
   }
+  &:hover{
+    border: 1px solid #cecece;
+  }
 }
 
 .order-cart-content {
@@ -31,13 +34,6 @@
   background-image: url("/img/ready.png");
   background-size: cover;
   cursor: pointer;
-}
-
-.completed-orders {
-  margin: 10px;
-  & table {
-    width: 30%;
-  }
 }
 
 .products-list {

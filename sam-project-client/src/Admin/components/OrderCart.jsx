@@ -6,7 +6,7 @@ class CompleteOrderBtn extends Component {
     e.preventDefault();
     if (window.confirm(`Is order № ${this.props.id.slice(20, 25)} ready?`)) {
       await api.deleteOrderById(this.props.id);
-      if (this.props.update) this.props.update();
+      window.location.reload();
     }
   };
 
@@ -22,7 +22,7 @@ export default class OrderCart extends Component {
     const order = this.props.order;
     return (
       <div className="order-cart">
-        <h2 className="color-brown">Order: № {order._id.slice(20, 25)}</h2>
+        <h3 className="color-brown">Order: № {order._id.slice(20, 25)}</h3>
         <h4 className="color-brown">{order.date}</h4>
         <div className="order-cart-content">
           <div>

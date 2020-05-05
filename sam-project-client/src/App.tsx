@@ -45,7 +45,7 @@ class App extends React.Component<{}, myState> {
     this.setState({
       itemsLS: arr,
     });
-    console.log("rising state", arr);
+    console.log("stateRise at App.js", arr);
   };
 
   render() {
@@ -53,7 +53,7 @@ class App extends React.Component<{}, myState> {
       <Router>
         <div className="App">
           <Route exact path="/">
-            <Header itemsFromRise={this.state.itemsLS} />
+            <Header updateState={this.stateRise}/> 
             <Navbar />
             <Banner />
             <Features />
@@ -66,8 +66,8 @@ class App extends React.Component<{}, myState> {
           </Route>
 
           <Route path="/basket">
-            <Header itemsFromRise={this.state.itemsLS} />
-            <BasketPage />
+            <Header updateState={this.stateRise}/>
+            <BasketPage updateState={this.stateRise}/>
             <Footer />
           </Route>
 

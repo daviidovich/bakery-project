@@ -29,7 +29,7 @@ class OrdersList extends Component {
       <div className="orders-content">
         {orders.map((order, i) => {
           return (
-            <OrderCart key={i} order={order} update={this.componentDidMount} />
+            <OrderCart key={i} order={order} />
           );
         })}
       </div>

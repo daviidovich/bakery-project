@@ -3,7 +3,7 @@
 }
 
 .catalog-content {
-  margin: 20px 318px;
+  margin: 20px 150px;
   flex-direction: column;
 }
 
@@ -26,20 +26,16 @@
 }
 
 .catalog-list {
-  width: 100%;
-}
-
-.catalog-list-content {
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
   margin: 10px;
 }
 
 .catalog-list-one {
   position: relative;
   flex-direction: column;
-  width: 320px;
+  min-width: 320px;
+  max-width: 320px;
   padding: 40px 15px 50px;
   margin: 10px;
   border: 1px solid rgba(224, 164, 94, 0.5);
