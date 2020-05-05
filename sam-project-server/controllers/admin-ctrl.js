@@ -1,5 +1,5 @@
 const db = require("../db/index");
-const Order = require("../admin/orderSchema");
+const Order = require("../schemas/orderSchema");
 
 // getPageAutho = (req, res) => {
 //   res.sendFile(__dirname + "/authorization.html");
