@@ -1,5 +1,5 @@
 import React from "react";
-import "./Footer.css";
+import "./Footer.scss";
 
 import Logo from "../Logo/Logo";
 
@@ -7,7 +7,7 @@ class Footer extends React.Component {
   render() {
     return (
       <div className="footer" id="footer">
-        <div className="footer-content flex-space-between">
+        <div className="footer-content flex-center">
           <div className="footer__col-1">
             <Logo />
             <div className="text text-center">
@@ -17,7 +17,7 @@ class Footer extends React.Component {
           </div>
           <div className="footer__col-2">
             <h3 className="footer-title color-brown">Information</h3>
-            <div className="footer__col-2-links flex-space-between">
+            <div className="footer__col-2-links">
               <div>
                 <a href="" className="text">
                   About us

@@ -31,17 +31,13 @@
 
 .onbutton-content {
   display: flex;
-  flex-direction: row;
+
   justify-content: space-between;
-  margin: 50px 150px;
+  margin: 50px 0px;
 }
 
 .onbutton-image {
-  width: 45%;
-}
-
-.onbutton-info {
-  width: 55%;
+  margin-right: 50px;
 }
 
 .ouraddress {

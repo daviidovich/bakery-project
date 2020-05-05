@@ -1,6 +1,6 @@
 .banner-content {
   display: flex;
-  margin: 120px 270px;
+  margin: 70px 90px;
 }
 
 .banner-price {
@@ -27,6 +27,7 @@
 
 .banner-image {
   position: relative;
+  margin-left: 40px;
   & img {
     height: 600px;
   }

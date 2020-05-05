@@ -4,9 +4,9 @@ import "./Header.css";
 import { PhoneIcon, MapIcon, ClockIcon } from "../Another/Icons";
 
 import Logo from "../Logo/Logo";
-import BasketIcon from "../Section Catalog/BasketIcon";
+import BasketIcon from "../Basket/BasketIcon";
 
-class Header extends React.Component<{ itemsFromRise: Array<Object> }> {
+class Header extends React.Component{
   render() {
     return (
       <header className="header" id="header">
@@ -26,7 +26,7 @@ class Header extends React.Component<{ itemsFromRise: Array<Object> }> {
             </div>
             <BasketIcon
               model={"basket"}
-              itemsFromRise={this.props.itemsFromRise}
+              updateState={this.props.updateState}
             />
           </div>
         </div>

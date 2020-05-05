@@ -1,6 +1,5 @@
 .features-content {
-  width: 1125px;
-  margin: 50px 385px 100px;
+  margin: 50px 100px 100px;
 }
 
 .features-slider {
@@ -8,6 +7,8 @@
 }
 
 .feature {
+  min-width: 260px;
+  max-width: 260px;
   border: 1px solid #eaeae8;
   border-radius: 5px;
   background-color: white;

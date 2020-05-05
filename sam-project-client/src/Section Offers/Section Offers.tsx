@@ -45,7 +45,7 @@ export default class Offers extends React.Component<{}, mySt> {
       <div className="offers" id="offers">
         <Headline label="Offer This Week" />
         <div className="offers-content flex-center">
-          <div className="offers-cards flex-space-between">
+          <div className="offers-cards flex-center">
             {offers.map((offer: any, i: any) => {
               let newP = getNewPrice(offer.price, offer.discount);
               return <OfferCard key={i} offer={offer} newPrice={newP} />;
