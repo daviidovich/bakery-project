@@ -13,45 +13,37 @@ import Header from "../components/Header";
 class AdminApp extends React.Component {
   render() {
     return (
-        <Router>
-          <Route path="/admhome">
-            <Header />
-            <div className="admin-app-content">
-              <NavBar />
-              <main>
-                <div className="main-content">
-                  <Switch>
-                    <Route exact path="/admhome">
-                      <h2 className="color-brown text-center">
-                        Welcome, administrator!
-                      </h2>
-                    </Route>
-                    <Route
-                      path="/admhome/list"
-                      exact
-                      component={ProductsList}
-                    />
-                    <Route
-                      path="/admhome/create"
-                      exact
-                      component={ProductsInsert}
-                    />
-                    <Route
-                      path="/admhome/update/:id"
-                      exact
-                      component={ProductsUpdate}
-                    />
-                    <Route
-                      path="/admhome/orders"
-                      exact
-                      component={OrdersList}
-                    />
-                  </Switch>
-                </div>
-              </main>
-            </div>
-          </Route>
-        </Router>
+      <Router>
+        <Route path="/admin">
+          <Header />
+          <div className="admin-app-content">
+            <NavBar />
+            <main>
+              <div className="main-content">
+                <Switch>
+                  <Route exact path="/admin">
+                    <h2 className="color-brown text-center">
+                      Welcome, administrator!
+                    </h2>
+                  </Route>
+                  <Route path="/admin/list" exact component={ProductsList} />
+                  <Route
+                    path="/admin/create"
+                    exact
+                    component={ProductsInsert}
+                  />
+                  <Route
+                    path="/admin/update/:id"
+                    exact
+                    component={ProductsUpdate}
+                  />
+                  <Route path="/admin/orders" exact component={OrdersList} />
+                </Switch>
+              </div>
+            </main>
+          </div>
+        </Route>
+      </Router>
     );
   }
 }

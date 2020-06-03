@@ -15,7 +15,7 @@ const Delete = styled.div`
 `;
 
 const Wrapper = styled.div`
-  display:flex;
+  display: flex;
   margin-bottom: 20px;
 `;
 
@@ -38,7 +38,7 @@ const InputText = styled.input.attrs({
 class UpdateProduct extends Component {
   updateUser = (event) => {
     event.preventDefault();
-    window.location.href = `/admhome/update/${this.props.id}`;
+    window.location.href = `/admin/update/${this.props.id}`;
   };
 
   render() {
@@ -64,14 +64,14 @@ class ProductsList extends Component {
     super(props);
     this.state = {
       items: [],
-      searchResult: []
+      searchResult: [],
     };
   }
   componentDidMount = async () => {
     await api.getAllProducts().then((items) => {
       this.setState({
         items: items.data.data,
-        searchResult: items.data.data
+        searchResult: items.data.data,
       });
     });
   };
@@ -80,27 +80,26 @@ class ProductsList extends Component {
     let searchQuery = e.target.value.toLowerCase(); // this указывает на текущий объект - search
     const items = this.state.items;
     let searchResult = this.state.searchResult;
-    
-    searchResult = items.filter(function(item){
-        var userString = item.id + ' ' + item.name + ' ' + item.section;   
-        userString = userString.toLowerCase() ;  
-        if(userString.indexOf(searchQuery) !== -1) return true;
-    })
-    this.setState({searchResult: searchResult})
-  }
+
+    searchResult = items.filter(function (item) {
+      var userString = item.id + " " + item.name + " " + item.section;
+      userString = userString.toLowerCase();
+      if (userString.indexOf(searchQuery) !== -1) return true;
+    });
+    this.setState({ searchResult: searchResult });
+  };
 
   handleSortBy = (e) => {
     const searchResult = this.state.searchResult;
     var currentOption = e.target.value;
- 
-    function sortObjects(a,b){
-      if(a[currentOption] > b[currentOption]) return 1;
+
+    function sortObjects(a, b) {
+      if (a[currentOption] > b[currentOption]) return 1;
       else return -1;
     }
     searchResult.sort(sortObjects);
-    this.setState({searchResult: searchResult})
-  }
-
+    this.setState({ searchResult: searchResult });
+  };
 
   render() {
     const searchResult = this.state.searchResult;
@@ -108,8 +107,12 @@ class ProductsList extends Component {
     return (
       <div className="products-list">
         <Wrapper>
-          <InputText type="text" placeholder="Search" onChange={this.handleSearch}/>
-          <Select onChange={this.handleSortBy} >
+          <InputText
+            type="text"
+            placeholder="Search"
+            onChange={this.handleSearch}
+          />
+          <Select onChange={this.handleSortBy}>
             <option value="" hidden>
               Sort by:
             </option>
@@ -118,7 +121,7 @@ class ProductsList extends Component {
             <option value="price">Price ↑</option>
           </Select>
         </Wrapper>
-        
+
         <Table striped bordered hover size="sm">
           <thead>
             <tr className="text-center">

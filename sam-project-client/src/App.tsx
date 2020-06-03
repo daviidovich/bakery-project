@@ -14,7 +14,7 @@ import {
   ProductsUpdate,
   OrdersList,
 } from "./Admin/pages/pages";
-import "./Admin/app/AdminApp.scss"
+import "./Admin/app/AdminApp.scss";
 import NavBar from "./Admin/components/Navbar";
 import HeaderAdmin from "./Admin/components/Header";
 
@@ -45,6 +45,7 @@ class App extends React.Component<{}, myState> {
     this.setState({
       itemsLS: arr,
     });
+    localStorage.setItem("itemById", JSON.stringify(arr));
     console.log("stateRise at App.js", arr);
   };
 
@@ -53,7 +54,7 @@ class App extends React.Component<{}, myState> {
       <Router>
         <div className="App">
           <Route exact path="/">
-            <Header updateState={this.stateRise}/> 
+            <Header updateState={this.stateRise} />
             <Navbar />
             <Banner />
             <Features />
@@ -66,51 +67,42 @@ class App extends React.Component<{}, myState> {
           </Route>
 
           <Route path="/basket">
-            <Header updateState={this.stateRise}/>
-            <BasketPage updateState={this.stateRise}/>
+            <Header updateState={this.stateRise} />
+            <BasketPage updateState={this.stateRise} />
             <Footer />
           </Route>
 
-          <Route path="/admin" exact component={Authorization} />
+          {/* <Route path="/admin" exact component={Authorization} /> */}
 
-          <Route path="/admhome">
-          <HeaderAdmin />
+          <Route path="/admin">
+            <HeaderAdmin />
             <div className="admin-app-content">
               <NavBar />
               <main>
                 <div className="main-content">
                   <Switch>
-                    <Route exact path="/admhome">
+                    <Route exact path="/admin">
                       <h2 className="color-brown text-center">
                         Welcome, administrator!
                       </h2>
                     </Route>
+                    <Route path="/admin/list" exact component={ProductsList} />
                     <Route
-                      path="/admhome/list"
-                      exact
-                      component={ProductsList}
-                    />
-                    <Route
-                      path="/admhome/create"
+                      path="/admin/create"
                       exact
                       component={ProductsInsert}
                     />
                     <Route
-                      path="/admhome/update/:id"
+                      path="/admin/update/:id"
                       exact
                       component={ProductsUpdate}
                     />
-                    <Route
-                      path="/admhome/orders"
-                      exact
-                      component={OrdersList}
-                    />
+                    <Route path="/admin/orders" exact component={OrdersList} />
                   </Switch>
                 </div>
               </main>
             </div>
           </Route>
-
         </div>
       </Router>
     );

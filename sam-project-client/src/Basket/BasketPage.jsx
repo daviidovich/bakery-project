@@ -64,7 +64,7 @@ export default class BasketPage extends React.Component {
   creatingOrder = () => {
     this.setDate();
     this.setCartItems();
-    this.setTotalPrice()
+    this.setTotalPrice();
     console.log("order", this.state);
     const {
       items,
@@ -88,14 +88,14 @@ export default class BasketPage extends React.Component {
     };
 
     api.makeOrder(payload).then((res) => {
-      window.alert(`Order fixed`);
       localStorage.clear();
-      //this.updateMarkup();
+      window.location.reload();
+      window.alert(`Order fixed`);
     });
   };
 
   render() {
-     return (
+    return (
       <div className="cart-page">
         <h1 className="color-brown">My Basket</h1>
         {arrLS.length !== 0 && (
@@ -103,7 +103,12 @@ export default class BasketPage extends React.Component {
             <div className="cart-page-userdata cart-item">
               <UserDataForm userData={this.setUserData} />
             </div>
-            <BasketMarkup model={"fullBasket"} setTotalPrice={this.setTotalPrice} setCartItems={this.setCartItems} updateState={this.props.updateState}/>
+            <BasketMarkup
+              model={"fullBasket"}
+              setTotalPrice={this.setTotalPrice}
+              setCartItems={this.setCartItems}
+              updateState={this.props.updateState}
+            />
           </div>
         )}
         {arrLS.length === 0 && (

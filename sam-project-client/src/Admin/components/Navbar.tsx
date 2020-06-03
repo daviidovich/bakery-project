@@ -9,18 +9,18 @@ class NavBar extends Component {
       <aside className="sidebar flex-colomn" id="navbar">
         <ul className="sidebar-items">
           <li className="sidebar-item text">
-            <Link to="/admhome/list" className="sidebar-link">
+            <Link to="/admin/list" className="sidebar-link">
               {ListIcon} Products list
             </Link>
           </li>
           <li className="sidebar-item text">
-            <Link to="/admhome/create" className="sidebar-link">
+            <Link to="/admin/create" className="sidebar-link">
               {Plus} Create Product
             </Link>
           </li>
 
           <li className="sidebar-item text">
-            <Link to="/admhome/orders" className="sidebar-link">
+            <Link to="/admin/orders" className="sidebar-link">
               {Check} Orders List
             </Link>
           </li>

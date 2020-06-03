@@ -125,7 +125,7 @@ class ProductsInsert extends React.Component {
       });
     });
     window.alert(`${name} inserted successfully`);
-    window.location.href = `/admhome/list`;
+    window.location.href = `/admin/list`;
   };
 
   render() {
@@ -136,7 +136,7 @@ class ProductsInsert extends React.Component {
         <Label>Section: </Label>
         <Select value={section} onChange={this.handleChangeInputSection}>
           <option value="" hidden>
-            Select the section
+            *Select the section
           </option>
           <option value="Bagels">Bagel</option>
           <option value="Chefs">Chef</option>
@@ -151,6 +151,7 @@ class ProductsInsert extends React.Component {
         <Label>Name: </Label>
         <InputText
           type="text"
+          placeholder="*"
           value={name}
           onChange={this.handleChangeInputName}
         />
@@ -158,6 +159,7 @@ class ProductsInsert extends React.Component {
         <Label>Description: </Label>
         <InputText
           type="text"
+          placeholder="*"
           value={description}
           onChange={this.handleChangeInputDesc}
         />
@@ -171,6 +173,7 @@ class ProductsInsert extends React.Component {
           max="100"
           pattern="[0-9]+([,\.][0-9]+)?"
           value={price}
+          placeholder="*"
           onChange={this.handleChangeInputPrice}
         />
 
@@ -191,9 +194,9 @@ class ProductsInsert extends React.Component {
           <option value="" hidden>
             Select the flag
           </option>
+          <option value="">-</option>
           <option value="Banner">Banner</option>
           <option value="Offer of week">Offer of week</option>
-          <option value="">-</option>
         </Select>
 
         <Button onClick={this.handleIncludeProduct}>Add Product</Button>

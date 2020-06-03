@@ -125,7 +125,7 @@ class ProductsUpdate extends React.Component {
       });
     });
     window.alert(`${name} updated successfully`);
-    window.location.href = `/admhome/list`;
+    window.location.href = `/admin/list`;
   };
 
   componentDidMount = async () => {
